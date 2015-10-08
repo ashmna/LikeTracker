@@ -1,0 +1,9 @@
+{
+  "name": "LikeTracker",
+  "dependencies": {
+    "jquery": "*",
+    "jquery-ui": "*",
+    "components-font-awesome" : "*",
+    "angular": "*"
+  }
+}
