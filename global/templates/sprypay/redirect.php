@@ -1,10 +1,10 @@
 <?php
 namespace {
 
-    use MD\Helpers\App;
+    use LT\Helpers\App;
 
     if(!App::isLoggedUser()) {
-        App::setCurrentPage('login');
+        //App::setCurrentPage('login');
     } else {
         // $currentPage = App::getCurrentPage();
         // if not exist page

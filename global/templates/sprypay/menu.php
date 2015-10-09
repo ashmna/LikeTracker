@@ -1,11 +1,11 @@
 <?php
 namespace {
 
-    use MD\Helpers\App;
-    use MD\Helpers\Defines;
+    use LT\Helpers\App;
+    use LT\Helpers\Defines;
 
     $menu = [];
-    if(App::isLoggedUser()) {
+//    if(App::isLoggedUser()) {
         switch(App::getUserRole()) {
             case Defines::ROLE_ADMIN:
             case Defines::ROLE_SECRETARY:
@@ -14,14 +14,16 @@ namespace {
             default:
                 $menu = [
                     'index',
-                    'doctors',
-                    'clients',
-                    'workingtimes',
-                    'calendar1',
-                    'edulik',
+                    'rating',
+                    'task-list',
+                    'my-tasks',
+                    'my-tasks-ex1',
+                    'my-tasks-ex2',
+                    'my-tasks-new',
+                    'terms-and-conditions',
                 ];
                 break;
         }
-    }
+//    }
     return $menu;
 }
