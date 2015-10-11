@@ -6,10 +6,10 @@ app.service('userServices', ['serverConnector', function (serverConnector) {
     }
 
 
-    this.login = function (data) {
+    this.login = function (vkId) {
         return serverConnector.send({
             url : url('login'),
-            data: data
+            vkId: vkId
         });
     };
 
@@ -17,27 +17,6 @@ app.service('userServices', ['serverConnector', function (serverConnector) {
         return serverConnector.send({
             method: 'GET',
             url   : url('logout')
-        });
-    };
-
-    this.register = function (data) {
-        return serverConnector.send({
-            url : url('register'),
-            data: {userData: data}
-        });
-    };
-
-    this.getUsersList = function (data) {
-        return serverConnector.send({
-            url : url('getUsersList'),
-            data: {filter: data}
-        });
-    };
-
-    this.deleteUser = function (userId) {
-        return serverConnector.send({
-            url : url('delete'),
-            data: {userId : userId}
         });
     };
 

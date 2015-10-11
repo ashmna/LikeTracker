@@ -1,4 +1,6 @@
-<table style="height:100%;width:800px; border-collapse: collapse;">
+<table style="height:100%;width:800px; border-collapse: collapse;"
+	ng-controller="userController"
+	ng-init="init()">
 	<tbody>
 	<tr>
 		<td valign="top" style="height:100%;width:0%;"></td>
@@ -11,12 +13,8 @@
 					<center style="padding-top:15px;">
 						Чтобы начать работать с сайтом, введите ссылку<br>
 						на Вашу страничку ВКонтакте:
-						<form action="http://snebes.ru/?" method="post">
-							<input type="text" name="url" maxlength="100" style="width: 300px"
-								   class="input_1" placeholder="Например http://vk.com/id1234567">
-							<input type="submit" value="Войти" class="submit_1">
-						</form>
-						<br></center>
+						<div id="login_button" onclick="VK.Auth.login(authInfo);" ></div>
+					<br></center>
 					<hr>
 					<br>
 					<center><b><font color="#FF3300">Нужны лайки, друзья, подписчики, вступившие в группу?

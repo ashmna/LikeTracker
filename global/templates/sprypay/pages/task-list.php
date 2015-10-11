@@ -1,4 +1,4 @@
-<table style="height:100%;width:800px; border-collapse: collapse;">
+<table style="height:100%;width:800px; border-collapse: collapse;" ng-controller="taskListController">
     <tbody>
     <tr>
         <td valign="top" style="height:100%;width:25%;">
@@ -23,12 +23,12 @@
                     id="bal">204</b><a href="http://snebes.ru/buy_balls.php"><img
                         src="/img/plus.png"> <b>Купить баллы</b></a>
                 <hr>
-                <a href="http://snebes.ru/tasks.php">Заработать баллы</a><a
-                    href="http://snebes.ru/my_tasks.php">Потратить баллы</a><a
-                    href="http://snebes.ru/transfer.php">Перевод баллов</a><a
-                    href="http://snebes.ru/referals.php">Партнерская программа</a><a
-                    href="http://snebes.ru/news.php">Новости <font color="#777777"></font></a><a
-                    href="http://snebes.ru/jurnal.php">Журнал <font color="#777777"></font></a><a
+                <a href="http://snebes.ru/tasks.php">Заработать баллы</a>
+                <a href="http://snebes.ru/my_tasks.php">Потратить баллы</a>
+                <a href="http://snebes.ru/transfer.php">Перевод баллов</a>
+                <a href="http://snebes.ru/referals.php">Партнерская программа</a>
+                <a href="http://snebes.ru/news.php">Новости</a>
+                <a href="http://snebes.ru/jurnal.php">Журнал <font color="#777777"></font></a><a
                     href="http://snebes.ru/support.php">Служба поддержки <font color="#777777"></font></a><a
                     href="http://snebes.ru/rules.php">Правила</a></div>
             <div class="warning_info">
@@ -40,15 +40,16 @@
         </td>
         <td width="" valign="top" style="height:100%;width:75%;">
             <div class="right_block">
-                <div class="title"><a
-                        href="/img/_..___ БИРЖА ПИАРА VK___....html"
-                        class="title_select">Все</a><a href="http://snebes.ru/tasks.php?c=1">Лайки</a><a
-                        href="http://snebes.ru/tasks.php?c=2">Сообщества</a><a
-                        href="http://snebes.ru/tasks.php?c=3">Друзья</a><a
-                        href="http://snebes.ru/tasks.php?c=4">Репосты</a><a
-                        href="http://snebes.ru/tasks.php?c=5">Опросы</a><a
-                        href="http://snebes.ru/tasks.php?c=6">Комменты</a><a
-                        href="http://snebes.ru/my_tasks.php">Мои задания</a></div>
+                <div class="title">
+                    <a href="#all"      ng-class="tab=='/all'      ? 'title_select' : ''">Все</a>
+                    <a href="#likes"    ng-class="tab=='/likes'    ? 'title_select' : ''">Лайки</a>
+                    <a href="#messages" ng-class="tab=='/messages' ? 'title_select' : ''">Сообщества</a>
+                    <a href="#friends"  ng-class="tab=='/friends'  ? 'title_select' : ''">Друзья</a>
+                    <a href="#share"    ng-class="tab=='/share'    ? 'title_select' : ''">Репосты</a>
+                    <a href="#polls"    ng-class="tab=='/polls'    ? 'title_select' : ''">Опросы</a>
+                    <a href="#comments" ng-class="tab=='/comments' ? 'title_select' : ''">Комменты</a>
+                    <!--<a href="#my_tasks">Мои задания</a>-->
+                </div>
                 <div class="line_block">
                     <div class="info2">
                         <center>Выполнять отмену выполненного задания <b>- запрещено</b>!</center>
@@ -60,9 +61,6 @@
 
                     </p>
 
-                    <script type="text/javascript"
-                            src="/img/jquery-1.11.0.min.js">
-                    </script>
                     <script type="text/javascript">
 
 

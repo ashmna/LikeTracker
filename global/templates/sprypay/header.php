@@ -1,5 +1,6 @@
 <?php
 use LT\Helpers\Config;
+use LT\Helpers\App;
 ?>
 <!DOCTYPE html>
 <html ng-app="app">
@@ -10,6 +11,10 @@ use LT\Helpers\Config;
 	<link rel="stylesheet" href="/css/style.css" type="text/css">
 	<script src="/global/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="/global/bower_components/angular/angular.min.js"></script>
+	<?php if(App::isLoggedUser()) { ?>
+	<?php } else { ?>
+	<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+	<?php } ?>
 	<title><?= Config::getInstance()->partnerName ?></title>
 </head>
 <body>
