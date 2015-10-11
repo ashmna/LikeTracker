@@ -2,10 +2,7 @@ app.controller('userController', ['$scope', 'userServices',
 function ($scope, userServices) {
     'use strict';
 
-    $scope.userLogin = {};
-    $scope.userInfo = {};
-
-    $scope.authInfo = function (response) {
+    function authInfo(response) {
         if (response.session) {
             userServices.login(response.session.mid)
             .success(function(data){
@@ -18,15 +15,17 @@ function ($scope, userServices) {
         } else {
             alert('not auth');
         }
-    };
+    }
 
     $scope.init = function() {
         VK.init({
             apiId: 5103114
         });
-        VK.Auth.getLoginStatus($scope.authInfo);
+        VK.Auth.getLoginStatus(authInfo);
         VK.UI.button('login_button');
     };
 
 
 }]);
+
+
