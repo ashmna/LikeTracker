@@ -16,7 +16,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 80,    host: 8080
   config.vm.network "forwarded_port", guest: 3306,  host: 33306
 
-  config.vm.synced_folder "../", "/usr/share/nginx/html"
+  config.vm.synced_folder "../LikeTracker", "/usr/share/nginx/html/LikeTracker"
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
