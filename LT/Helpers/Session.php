@@ -9,6 +9,7 @@ namespace LT\Helpers;
  *
  * @property bool $isLogged
  * @property string $language
+ * @property \LT\Models\User|null $user
  */
 class Session {
     private $session;

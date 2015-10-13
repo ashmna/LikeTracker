@@ -1,6 +1,6 @@
 <table style="height:100%;width:800px; border-collapse: collapse;"
 	ng-controller="userController"
-	ng-init="init()">
+	ng-init="init(5103114)">
 	<tbody>
 	<tr>
 		<td valign="top" style="height:100%;width:0%;"></td>

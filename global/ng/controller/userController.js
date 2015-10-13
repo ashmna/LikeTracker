@@ -17,9 +17,9 @@ function ($scope, userServices) {
         }
     }
 
-    $scope.init = function() {
+    $scope.init = function(apiId) {
         VK.init({
-            apiId: 5103114
+            apiId: apiId
         });
         VK.Auth.getLoginStatus(authInfo);
         VK.UI.button('login_button');
