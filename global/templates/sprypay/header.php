@@ -14,7 +14,7 @@ use LT\Helpers\App;
 	<script src="/global/bower_components/angular-route/angular-route.min.js"></script>
 	<?php if(App::isLoggedUser()) { ?>
 	<?php } else { ?>
-	<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+	<!--<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>-->
 	<?php } ?>
 	<title><?= Config::getInstance()->partnerName ?></title>
 </head>

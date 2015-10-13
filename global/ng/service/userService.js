@@ -9,7 +9,7 @@ app.service('userServices', ['serverConnector', function (serverConnector) {
     this.login = function (vkId) {
         return serverConnector.send({
             url : url('login'),
-            vkId: vkId
+            data: {vkId:vkId}
         });
     };
 
