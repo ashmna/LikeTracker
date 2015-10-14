@@ -50,5 +50,15 @@ class TaskImpl implements \LT\DAO\Task {
         return $this->db->insert('users_tasks', $userTask->toArray());
     }
 
+    public function ignoreTask($taskId) {
+        $userTask = new UserTask();
+        $userTask->setIsDone(false);
+        $userTask->setTaskId($taskId);
+        $userTask->setUserId(App::getUserId());
+        $userTask->setCreateDate(date('Y-m-d H:i:s'));
+
+        return $this->db->insert('users_tasks', $userTask->toArray());
+    }
+
 
 }

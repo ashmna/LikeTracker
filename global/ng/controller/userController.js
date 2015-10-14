@@ -25,6 +25,7 @@ function ($scope, userServices) {
         VK.UI.button('login_button');
     };
 
+    $scope.authInfo = authInfo;
 
 }]);
 

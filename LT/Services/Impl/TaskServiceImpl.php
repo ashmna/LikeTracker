@@ -19,4 +19,9 @@ class TaskServiceImpl implements TaskService
         return $this->taskDao->getTasks($type, $count);
     }
 
+    function ignoreTask($taskId) {
+        return $this->taskDao->ignoreTask($taskId);
+    }
+
+
 }

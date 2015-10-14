@@ -2,7 +2,7 @@ app.service('userServices', ['serverConnector', function (serverConnector) {
     'use strict';
 
     function url(url) {
-        return '/api/user/' + url + '/';
+        return '/global/api/user/' + url + '/';
     }
 
 

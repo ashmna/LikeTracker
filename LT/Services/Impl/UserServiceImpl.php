@@ -4,10 +4,9 @@
 namespace LT\Services\Impl;
 
 
+use LT\Helpers\App;
 use LT\Models\User;
 use LT\Services\UserService;
-use LT\Helpers\App;
-use LT\Helpers\Notification;
 
 /**
  * Class UserServiceImpl
@@ -23,6 +22,7 @@ class UserServiceImpl implements UserService {
     protected $userDao;
 
     public function login($vkId) {
+        echo($vkId);
         $user = new User();
         $user->setVkId($vkId);
         $user->setLastLoginDate(date('Y-m-d H:i:s'));
