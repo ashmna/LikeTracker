@@ -10,17 +10,25 @@ class Task extends Model {
 
     protected $partnerId;
     protected $taskId;
+    protected $ownerId;
     protected $type;
     protected $url;
     protected $amount;
     protected $count;
     protected $doneCount;
+    protected $createDate;
 
     public function getTaskId() {
         return $this->taskId;
     }
     public function setTaskId($taskId) {
         $this->taskId = $taskId;
+    }
+    public function getOwnerId() {
+        return $this->ownerId;
+    }
+    public function setOwnerId($ownerId) {
+        $this->ownerId = $ownerId;
     }
     public function getType() {
         return $this->type;
@@ -51,6 +59,12 @@ class Task extends Model {
     }
     public function setDoneCount($doneCount) {
         $this->doneCount = $doneCount;
+    }
+    public function getCreateDate() {
+        return $this->createDate;
+    }
+    public function setCreateDate($createDate) {
+        $this->createDate = $createDate;
     }
 
 

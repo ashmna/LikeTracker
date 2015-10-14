@@ -62,6 +62,19 @@ class App {
 //        $this->container->enablePostProcessor('Logger', ['path' => 'D:\affiliates.log']);
     }
 
+    public static function getPartnerId() {
+        return Config::getInstance()->partnerId;
+    }
+
+    public static function getUserId() {
+        $id = 0;
+        $user = self::getSession()->user;
+        if(isset($user)) {
+            $id = $user->getVkId();
+        }
+        return $id;
+    }
+
     public function callFromRequest(array $arguments = []) {
         $classData  = self::getClassNameAndMethodFromURI();
         $className  = str_replace('-', '', $classData['className']);

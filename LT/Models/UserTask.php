@@ -12,6 +12,7 @@ class UserTask extends Model {
     protected $taskId;
     protected $userId;
     protected $isDone;
+    protected $createDate;
 
     public function getTaskId() {
         return $this->taskId;
@@ -31,6 +32,13 @@ class UserTask extends Model {
     public function setIsDone($isDone) {
         $this->isDone = $isDone;
     }
+    public function getCreateDate() {
+        return $this->createDate;
+    }
+    public function setCreateDate($createDate) {
+        $this->createDate = $createDate;
+    }
+
 
 
 }
