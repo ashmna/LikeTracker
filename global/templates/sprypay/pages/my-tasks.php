@@ -119,7 +119,7 @@
                 <div class="line_block" ng-show="tab=='new' && type">
                     <center><a href="#/new">[все накрутки]</a></center>
 
-                    <center><h4>Заказ накрутки "Мне нравится":</h4></center>
+                    <center><h4>Заказ накрутки "{{typeTitle}}":</h4></center>
                     <div id="1" class="info">
                         Прежде чем вводить ссылку, проверьте, не защищена ли она настройками
                         приватности.<br>

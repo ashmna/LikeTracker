@@ -5,14 +5,25 @@ function ($scope, $location, taskService) {
     $scope.$location = $location;
     $scope.tab = 'all';
     $scope.type = '';
+    $scope.typeTitle = '';
     $scope.currentTaskList = [];
 
     var tasksData = {};
     var tasksListLimit = 15;
+    var typeToTitle = {
+        'like'   : 'Мне нравится',
+        'group'  : 'Сообщество',
+        'friend' : 'Друзей',
+        'share'  : 'Рассказать друзьям',
+        'poll'   : 'Опрос',
+        'comment': 'Комментарии',
+        'video'  : 'Video'
+    };
 
     $scope.$watch('$location.$$path', function() {
         var arr = $location.$$path.split('/'), i = 0, tabFonded = false;
         $scope.type = '';
+        $scope.typeTitle = '';
         for(; i<arr.length; ++i) {
             if(!arr[i].length) continue;
             if(tabFonded) {
@@ -29,6 +40,10 @@ function ($scope, $location, taskService) {
         if(['like','group','friend','share','poll','comment','video'].indexOf($scope.type) == -1) {
             $scope.type = '';
         }
+        if(typeToTitle[$scope.type]) {
+            $scope.typeTitle = typeToTitle[$scope.type];
+        }
+
         $scope.checkTasksData();
     });
 
