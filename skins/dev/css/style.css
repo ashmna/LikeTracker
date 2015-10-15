@@ -116,9 +116,9 @@ a:hover {
 .input_1:focus {
     border: 1px solid #74b9ef;
     border-radius: 4px;
-    -moz-box-shadow: 0 0 7px rgba(116, 185, 239, 0.5, 0.5); /* Для Firefox */
-    -webkit-box-shadow: 0 0 7px rgba(116, 185, 239, 0.5, 0.5); /* Для Safari и Chrome */
-    box-shadow: 0 0 7px rgba(116, 185, 239, 0.5); /* Параметры тени */
+    -moz-box-shadow: 0 0 7px rgba(116, 185, 239, 0.5, 0.5); /* пїЅпїЅпїЅ Firefox */
+    -webkit-box-shadow: 0 0 7px rgba(116, 185, 239, 0.5, 0.5); /* пїЅпїЅпїЅ Safari пїЅ Chrome */
+    box-shadow: 0 0 7px rgba(116, 185, 239, 0.5); /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
 }
 
 .input_2 {
@@ -202,7 +202,7 @@ hr {
     color: #EEEEEE;
     background-color: #dfdede;
     height: 1px;
-    border-width:0; /* убрать рамки вокруг элемента */
+    border-width:0; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
     margin-top: 9px;
     margin-bottom: 7px;
 }
@@ -455,9 +455,9 @@ a.head_nav_sellect {
     width: 100%;
     color: #333333;
     padding-top: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 1px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 0;
     border: 1px #eeeeee solid;
 }
 
@@ -465,7 +465,7 @@ a.head_nav_sellect {
     display: inline;
     /*border-top-radius:3px;*/
     border-radius: 5px 5px 0 0;
-    padding: 8px 10px 5px;
+    padding: 8px 7px 5px;
     width: 100%;
     color: #333333;
     background: #fff;
@@ -478,7 +478,7 @@ a.head_nav_sellect {
     display: inline;
     /*border-top-radius:3px;*/
     border-radius: 5px 5px 0 0;
-    padding: 8px 10px 5px;
+    padding: 8px 7px 5px;
     width: 100%;
     color: #303030;
     background: #fff;
@@ -491,7 +491,7 @@ a.title_select {
     display: inline;
     /*border-top-radius:3px;*/
     border-radius: 5px 5px 0 0;
-    padding: 8px 10px 5px;
+    padding: 8px 7px 5px;
     width: 100%;
     color: #303030;
     background: #fff;

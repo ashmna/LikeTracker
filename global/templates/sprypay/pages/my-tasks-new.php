@@ -46,7 +46,8 @@
                         href="http://snebes.ru/my_tasks.php?c=3">Друзья</a><a
                         href="http://snebes.ru/my_tasks.php?c=4">Репосты</a><a
                         href="http://snebes.ru/my_tasks.php?c=5">Опросы</a><a
-                        href="http://snebes.ru/my_tasks.php?c=6">Комменты</a><a
+                        href="http://snebes.ru/my_tasks.php?c=6">Комменты</a>
+                    <a
                         href="/img/4_..___ БИРЖА ПИАРА VK___....html"
                         class="title_select">Новое</a></div>
                 <div class="line_block">

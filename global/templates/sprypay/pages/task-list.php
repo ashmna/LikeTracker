@@ -1,4 +1,4 @@
-<table style="height:100%;width:800px; border-collapse: collapse;" ng-controller="taskListController">
+<table style="height:100%;width:800px; border-collapse: collapse;" ng-controller="taskListController" ng-cloak>
     <tbody>
     <tr>
         <td valign="top" style="height:100%;width:25%;">
@@ -41,13 +41,13 @@
         <td width="" valign="top" style="height:100%;width:75%;">
             <div class="right_block">
                 <div class="title">
-                    <a href="#all"      ng-class="tab=='/all'      ? 'title_select' : ''">Все</a>
-                    <a href="#likes"    ng-class="tab=='/likes'    ? 'title_select' : ''">Лайки</a>
-                    <a href="#messages" ng-class="tab=='/messages' ? 'title_select' : ''">Сообщества</a>
-                    <a href="#friends"  ng-class="tab=='/friends'  ? 'title_select' : ''">Друзья</a>
-                    <a href="#share"    ng-class="tab=='/share'    ? 'title_select' : ''">Репосты</a>
-                    <a href="#polls"    ng-class="tab=='/polls'    ? 'title_select' : ''">Опросы</a>
-                    <a href="#comments" ng-class="tab=='/comments' ? 'title_select' : ''">Комменты</a>
+                    <a href="#all"     ng-class="tab=='all'     ? 'title_select' : ''">Все</a>
+                    <a href="#like"    ng-class="tab=='like'    ? 'title_select' : ''">Лайки</a>
+                    <a href="#group"   ng-class="tab=='group'   ? 'title_select' : ''">Сообщества</a>
+                    <a href="#friend"  ng-class="tab=='friend'  ? 'title_select' : ''">Друзья</a>
+                    <a href="#share"   ng-class="tab=='share'   ? 'title_select' : ''">Репосты</a>
+                    <a href="#poll"    ng-class="tab=='poll'    ? 'title_select' : ''">Опросы</a>
+                    <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>
                     <!--<a href="#my_tasks">Мои задания</a>-->
                 </div>
                 <div class="line_block">

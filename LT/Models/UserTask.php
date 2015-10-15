@@ -11,6 +11,9 @@ class UserTask extends Model {
     protected $partnerId;
     protected $taskId;
     protected $userId;
+    protected $takenAmount = 0;
+    protected $givenAmount = 0;
+    protected $commission  = 0;
     protected $isDone;
     protected $createDate;
 
@@ -25,6 +28,24 @@ class UserTask extends Model {
     }
     public function setUserId($userId) {
         $this->userId = $userId;
+    }
+    public function getTakenAmount() {
+        return $this->takenAmount;
+    }
+    public function setTakenAmount($takenAmount) {
+        $this->takenAmount = $takenAmount;
+    }
+    public function getGivenAmount() {
+        return $this->givenAmount;
+    }
+    public function setGivenAmount($givenAmount) {
+        $this->givenAmount = $givenAmount;
+    }
+    public function getCommission() {
+        return $this->commission;
+    }
+    public function setCommission($commission) {
+        $this->commission = $commission;
     }
     public function getIsDone() {
         return $this->isDone;

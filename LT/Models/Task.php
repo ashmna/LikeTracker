@@ -4,6 +4,7 @@
 namespace LT\Models;
 
 
+use LT\Helpers\Defines;
 use LT\Helpers\Model;
 
 class Task extends Model {
@@ -16,6 +17,7 @@ class Task extends Model {
     protected $amount;
     protected $count;
     protected $doneCount;
+    protected $status = Defines::STATUS_ENABLED;
     protected $createDate;
 
     public function getTaskId() {
@@ -59,6 +61,12 @@ class Task extends Model {
     }
     public function setDoneCount($doneCount) {
         $this->doneCount = $doneCount;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
     }
     public function getCreateDate() {
         return $this->createDate;
