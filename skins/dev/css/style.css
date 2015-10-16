@@ -445,11 +445,13 @@ a.head_nav_sellect {
 .title {
     background: #eeeeee;
     color: #ffffff;
-    padding: 20px 15px 5px;
+    padding: 20px 10px 5px;
     border-bottom: 1px #cccccc solid;
+	font-size: 0;
 }
 
 .title a {
+	font-size: 12px;
     height: 40px;
     display: inline;
     width: 100%;
