@@ -55,7 +55,7 @@
                         <center>Выполнять отмену выполненного задания <b>- запрещено</b>!</center>
                     </div>
                     <center><br>
-                        <a href="http://snebes.ru/tasks.php?c=0">[обновить страницу]</a>
+                        <a style="cursor: pointer" ng-click="refreshCurrentTaskList()">[обновить страницу]</a>
                     </center>
                     <p id="iki">
 
@@ -117,152 +117,43 @@
                             }, 100);
                         }
                     </script>
-                    <table class="table_2" bordercolor="#DEE4E8" cellpadding="1"
-                           style="height:100%;width:100%;&gt;&lt;tr&gt;&lt;td bgcolor=" #f5f7f8
-                    "="">
-                    <tbody>
-                    <tr>
-                        <td bgcolor="#F5F7F8" align="center"><b>Цена</b></td>
-                        <td bgcolor="#F5F7F8" align="center"><b>Ссылка</b></td>
-                        <td bgcolor="#F5F7F8" align="center"><b>Действие</b></td>
-                    </tr>
-                    <tr id="i22421150">
-                        <td align="center"><b>+35</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url2421150" href="#"
-                                     onclick="openWin(&#39;public98566114&#39;,2421150)"
-                                     style="cursor:pointer"><img
-                                        src="/img/groups.png"> <b>Вступи</b>
-                                    public98566114
+                    <table class="table_2" bordercolor="#DEE4E8" cellpadding="1" style="height:100%;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td bgcolor="#F5F7F8" align="center"><b>Цена</b></td>
+                            <td bgcolor="#F5F7F8" align="center"><b>Ссылка</b></td>
+                            <td bgcolor="#F5F7F8" align="center"><b>Действие</b></td>
+                        </tr>
+
+                        <tr ng-repeat="task in currentTaskList">
+                            <td align="center">
+                                <b ng-bind-template="+{{task.price - task.commission}}"></b>
+                                <img src="/img/balls.png">
+                            </td>
+                            <td align="center">
+                                <div class="b1">
+                                    <div ng-click="doTask(task)" style="cursor:pointer">
+                                        <img src="/img/groups.png">
+                                        <b>Вступи</b> public98566114
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i2421150" type="button" value="Готово"
-                                   onclick="go(2421150,201020665,&#39;012b0c2a9e8d63c42e9d75b7df85a3b3&#39;)">
-                            <a id="c2421150" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(2421150,201020665,&#39;012b0c2a9e8d63c42e9d75b7df85a3b3&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr id="i22677578">
-                        <td align="center"><b>+29</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url2677578" href="#"
-                                     onclick="openWin(&#39;club102924927&#39;,2677578)"
-                                     style="cursor:pointer"><img
-                                        src="/img/groups.png"> <b>Вступи</b>
-                                    club102924927
-                                </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i2677578" type="button" value="Готово"
-                                   onclick="go(2677578,201020665,&#39;47eed568ebc05453fc6d61e04e097ee6&#39;)">
-                            <a id="c2677578" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(2677578,201020665,&#39;47eed568ebc05453fc6d61e04e097ee6&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr id="i22677589">
-                        <td align="center"><b>+29</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url2677589" href="#"
-                                     onclick="openWin(&#39;club102417942&#39;,2677589)"
-                                     style="cursor:pointer"><img
-                                        src="/img/groups.png"> <b>Вступи</b>
-                                    club102417942
-                                </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i2677589" type="button" value="Готово"
-                                   onclick="go(2677589,201020665,&#39;83df00440df8a90bbcc2571ec85e51bc&#39;)">
-                            <a id="c2677589" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(2677589,201020665,&#39;83df00440df8a90bbcc2571ec85e51bc&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr id="i22674652">
-                        <td align="center"><b>+29</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url2674652" href="#"
-                                     onclick="openWin(&#39;club101121860&#39;,2674652)"
-                                     style="cursor:pointer"><img
-                                        src="/img/groups.png"> <b>Вступи</b>
-                                    club101121860
-                                </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i2674652" type="button" value="Готово"
-                                   onclick="go(2674652,201020665,&#39;a9ae343651724563cd0a061db3a7ea34&#39;)">
-                            <a id="c2674652" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(2674652,201020665,&#39;a9ae343651724563cd0a061db3a7ea34&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr id="i22677587">
-                        <td align="center"><b>+29</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url2677587" href="#"
-                                     onclick="openWin(&#39;club103610466&#39;,2677587)"
-                                     style="cursor:pointer"><img
-                                        src="/img/groups.png"> <b>Вступи</b>
-                                    club103610466
-                                </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i2677587" type="button" value="Готово"
-                                   onclick="go(2677587,201020665,&#39;d55bbed6fa4eff55063654e77c43dba2&#39;)">
-                            <a id="c2677587" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(2677587,201020665,&#39;d55bbed6fa4eff55063654e77c43dba2&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr id="i21757182">
-                        <td align="center"><b>+28</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url1757182" href="#"
-                                     onclick="openWin(&#39;id210615904&#39;,1757182)"
-                                     style="cursor:pointer"><img
-                                        src="/img/friends.png"> <b>Добавь</b>
-                                    id210615904
-                                </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i1757182" type="button" value="Готово"
-                                   onclick="go(1757182,201020665,&#39;3485a1fc045b1f5a5179749be8e7628f&#39;)">
-                            <a id="c1757182" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(1757182,201020665,&#39;3485a1fc045b1f5a5179749be8e7628f&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr id="i22597560">
-                        <td align="center"><b>+28</b> <img
-                                src="/img/balls.png"></td>
-                        <td align="center">
-                            <div class="b1">
-                                <div id="url2597560" href="#"
-                                     onclick="openWin(&#39;id180792358&#39;,2597560)"
-                                     style="cursor:pointer"><img
-                                        src="/img/friends.png"> <b>Добавь</b>
-                                    id180792358
-                                </div>
-                            </div>
-                        </td>
-                        <td><input class="button_2" id="i2597560" type="button" value="Готово"
-                                   onclick="go(2597560,201020665,&#39;887dbde478f76e9de806f4ec93c53369&#39;)">
-                            <a id="c2597560" href="http://snebes.ru/tasks.php?#"
-                               onclick="cl(2597560,201020665,&#39;887dbde478f76e9de806f4ec93c53369&#39;)">Игнор</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <center>Если выполнил(а), обновляй страницу!:)</center>
-                        </td>
-                    </tr>
-                    </tbody>
+                            </td>
+                            <td>
+                                <input ng-class="task.btn.class ? task.btn.class: 'button_2'" type="button" value="{{task.btn.title ? task.btn.title : 'Готово' }}" ng-click="checkTask(task)">
+                                <a style="cursor: pointer;" ng-click="ignoreTask(task)" ng-hide="task.btn.hideIgnore">Игнор</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <center>Если выполнил(а), обновляй страницу!:)</center>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
 </table>

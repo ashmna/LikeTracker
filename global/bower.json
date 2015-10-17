@@ -5,7 +5,8 @@
     "jquery-ui": "*",
     "components-font-awesome" : "*",
     "angular": "*",
-    "angular-route": "*"
+    "angular-route": "*",
+    "angular-sanitize": "*"
   }
 
 }

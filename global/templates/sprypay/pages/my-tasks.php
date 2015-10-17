@@ -58,11 +58,35 @@
                         </div>
                     </center>
 
-                    <div class="view_block">view_block</div>
-                    <div class="view_block_2">view_block_2</div>
-                    <div class="view_block2">view_block2</div>
+                    <table ng-show="currentTaskList.length" class="table_1" bordercolor="#DEE4E8" CELLPADDING=1 style="height:100%;width:100%;">
+                    <tr>
+                        <td bgcolor="#F5F7F8"><b>Ваши ссылки</b>
+                        <td bgcolor="#F5F7F8"><b>Выполнили</b></td>
+                        <td bgcolor="#F5F7F8"><b>Цена</b></td>
+                        <td bgcolor="#F5F7F8"><b>Kоличество</b></td>
+                        <td bgcolor="#F5F7F8"><b>Действия</b></td>
+                    <tr>
+                    <tr ng-repeat="task in currentTaskList">
+                        <td>
+                            <img src="img/likes.png">
+                            <a href="http://vk.com/{{task.url}}" target="_blank">{{task.url}}</a>
+                        </td>
+                        <td ng-bind="task.doneCount"></td>
+                        <td ng-bind="task.price"></td>
+                        <td ng-bind="task.count">42</td>
+                        <td>
+                            <!--<a href="?act=edit&task_id=2723999">Редактировать</a>
+                            <br>-->
+                            <a style="cursor: pointer" ng-click="deleteTask(task)">Удалить</a>
+                        </td>
+                    <tr>
+                    </table>
 
-                    <div class="view_block2">У Вас еще нет заданий в этой категории.</div>
+<!--                    <div class="view_block">view_block</div>-->
+<!--                    <div class="view_block_2">view_block_2</div>-->
+<!--                    <div class="view_block2">view_block2</div>-->
+
+                    <div class="view_block2" ng-hide="currentTaskList.length">У Вас еще нет заданий в этой категории.</div>
                 </div>
                 <div class="line_block" ng-show="tab=='new' && !type">
                     <center><h3>Что заказываем?</h3></center>
@@ -120,70 +144,10 @@
                     <center><a href="#/new">[все накрутки]</a></center>
 
                     <center><h4>Заказ накрутки "{{typeTitle}}":</h4></center>
-                    <div id="1" class="info">
-                        Прежде чем вводить ссылку, проверьте, не защищена ли она настройками
-                        приватности.<br>
+                    <div ng-class="currentTask.infoClass" ng-bind-html="currentTask.info">
                     </div>
-
-                    </script>
-                    <script type="text/javascript">
-                        function s() {
-                            var url = $('#url').val();
-                            var price = $('#pri').val();
-                            var balls = $('#balls').val();
-                            $('#button1').attr('onclick', '');
-                            $('#button1').val('Пожалуйста, ждите...');
-                            $.get('c.php?action=add_1&url=' + url + '&price=' + price + '&balls=' + balls, function (data) {
-                                if (data == 'ok') {
-                                    $('#2').css('display', 'none');
-                                    $('#1').attr('class', 'okey');
-                                    $('#1').html('<font color = "green"><b>Заказ успешно добавлен в <a href = "my_tasks.php">список Ваших заданий</a>!</b></font>');
-                                } else {
-                                    $('#1').attr('class', 'error');
-                                    $('#button1').attr('onclick', 's()');
-                                    $('#button1').val('Добавить задание');
-                                    if (data == '1') {
-                                        $('#1').html('Пожалуйста, заполните все поля.');
-                                    }
-                                    if (data == '2') {
-                                        $('#1').html('Вы ввели ссылку не правильно. Ссылка должна иметь такой вид, как на следующих примерах:<br>https://vk.com/wall345678_12345;<br>photo345678_12345;<br>video345678_12345.');
-                                    }
-                                    if (data == '3') {
-                                        $('#1').html('Запись не найдена или защищена настройками приватности. Проверьте существует ли запись или откройте к ней доступ для всех пользователей.');
-                                    }
-                                    if (data == '33') {
-                                        $('#1').html('Фотография не найдена или защищена настройками приватности. Проверьте существует ли фотография или откройте к ней доступ для всех пользователей.');
-                                    }
-                                    if (data == '333') {
-                                        $('#1').html('Видеозапись не найдена или защищена настройками приватности. Проверьте существует ли видеозапись или откройте к ней доступ для всех пользователей.');
-                                    }
-                                    if (data == '5') {
-                                        $('#1').html('У Вас нет на балансе столько баллов, чтобы сделать такой заказ.');
-                                    }
-                                    if (data == '6') {
-                                        $('#1').html('Минимальная цена задания - 2 балла.');
-                                    }
-                                    if (data == '7') {
-                                        $('#1').html('Заказ должен быть хотя бы на 10 лайков, как минимум.');
-                                    }
-                                    if (data == '8') {
-                                        $('#1').html('Это задание заблокировано.');
-                                    }
-                                    if (data == '9') {
-                                        $('#1').html('Такое задание у Вас уже существует. Сначала удалите его в категории <a href="my_tasks.php"><b>Мои задания</b></a>');
-                                    }
-                                    if (data == '99') {
-                                        $('#1').html('Пожалуйста, сначала откройте полный доступ к фотографии. <br> Зайдите "Вконтакте" : Мои настройки->Приватность <br> На поле "Кто видит комментарии к записям" установите <b>Все пользователи</b> ');
-                                    }
-
-                                }
-                            });
-
-                        }
-                        ;
-                    </script>
-                    <div id="2">
-                        <form action="http://snebes.ru/add_tasks.php?t=add&type=1" method="post">
+                    <div>
+                        <form method="post">
                             <table class="table_2" cellpadding="1" style="height:100%;width:100%;">
                                 <tbody>
                                 <tr>
@@ -192,24 +156,26 @@
                                         <font color="#777777">Введите ссылку, куда лайкать</font>
                                     </td>
                                     <td valign="top">
-                                        <input id="url" class="form_text" type="text" name="url"
+                                        <input id="url" class="form_text" type="url" name="url"
                                                maxlength="100" style="width: 90%"
-                                               placeholder="на запись, фото или видео">
+                                               placeholder="на запись, фото или видео"
+                                               ng-model="currentTask.url">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="height:100%;width:230px;" valign="top">
                                         <b>2. Цена задания (мин. 2 балла):</b><br>
-                                        <font color="#777777">Введите цену, которую будете платить за
+                                        <font color="#777777">
+                                            Введите цену, которую будете платить за
                                             лайк<br>Чем выше цена, тем выше Ваш заказ в списке
-                                            заданий</font>
+                                            заданий
+                                        </font>
                                     </td>
                                     <td valign="top">
                                         <input id="pri" class="form_text" type="text" name="price"
-                                               maxlength="7" style="width: 85px" value="13"><br>
-                                        <small>С комиссией: <b id="pri_kom">9<b></b></b></small>
-                                        <b id="pri_kom"><b>
-                                            </b></b></td>
+                                               maxlength="7" style="width: 85px" ng-model="currentTask.price"><br>
+                                        <small>С комиссией: <b id="pri_kom">{{currentTask.price + currentTask.commission}}</small>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td style="height:100%;width:230px;" valign="top">
@@ -218,7 +184,7 @@
                                     </td>
                                     <td valign="top">
                                         <input id="ko" class="form_text" type="text" name="ko" maxlength="7"
-                                               style="width: 85px" value="15">
+                                               style="width: 85px" value="15" ng-model="currentTask.count">
                                     </td>
                                 </tr>
                                 <tr>
@@ -231,41 +197,24 @@
                                         <input type="hidden" id="balls" name="balls" maxlength="7"
                                                style="width: 85px" value="195">
                                         <input class="form_text" type="text" id="balanse" name="balanse"
-                                               maxlength="7" style="width: 85px" value="195"
-                                               disabled="disabled"><br>
+                                               maxlength="7" style="width: 85px" value="{{currentTask.count * (currentTask.price + currentTask.commission)}}"
+                                               disabled="disabled">
+                                        <br>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                             <center>
-                                <input id="button1" type="button" value="Добавить задание" class="submit"
-                                       onclick="s()">
+                                <input type="button" value="Добавить задание" class="submit" ng-click="saveCurrentTask()">
                             </center>
                         </form>
 
                         <hr>
-                        <center><font color="#777777">
+                        <center>
+                            <font color="#777777">
                                 Комиссия системы от цены задания 30% или минимум 1 балл.
-                            </font></center>
-                        <script type="text/javascript"
-                                src="/img/jquery-1.11.0.min.js"></script>
-                        <script type="text/javascript"> $("#pri").keyup(function () {
-                                var p = Number($("#pri").val());
-                                var k = Number($("#ko").val());
-                                if (p < 10) {
-                                    $("#pri_kom").html(Math.floor(p - 1));
-                                } else {
-                                    $("#pri_kom").html(Math.floor(p - (p / 100 * 30)));
-                                }
-                                $("#balls").val(p * k);
-                                $("#balanse").val(p * k);
-                            });
-                            $("#ko").keyup(function () {
-                                var p = Number($("#pri").val());
-                                var k = Number($("#ko").val());
-                                $("#balls").val(p * k);
-                                $("#balanse").val(p * k);
-                            });</script>
+                            </font>
+                        </center>
                     </div>
                 </div>
 

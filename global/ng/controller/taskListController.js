@@ -14,6 +14,7 @@ function ($scope, $location, taskService) {
         if(['like','group','friend','share','poll','comment','video'].indexOf($scope.tab) == -1) {
             $scope.tab = 'all';
         }
+        $scope.currentTaskList = [];
         $scope.checkTasksData();
     });
 
@@ -37,6 +38,38 @@ function ($scope, $location, taskService) {
         var type = $scope.tab.replace('/', '');
         tasksData[type] = [];
         $scope.checkTasksData();
+    };
+    $scope.ignoreTask = function(task) {
+        task.btn.title = '...';
+        task.btn.hideIgnore = true;
+        taskService.ignoreTask(task.taskId)
+            .success(function(data){
+                if(data.status && data.result) {
+                    $scope.currentTaskList.splice($scope.currentTaskList.indexOf(task), 1);
+                }
+            });
+    };
+    $scope.checkTask = function(task) {
+        task.btn.title = '...';
+        taskService.checkTask(task.taskId)
+            .success(function(data){
+                if(data.status) {
+                    task.btn.title = 'Выполнено';
+                    task.btn.class = 'button_3';
+                } else {
+                    task.btn.title = 'Ошибка';
+                    task.btn.class = 'button_4';
+                }
+            });
+    };
+    $scope.doTask = function(task) {
+        task.win = window.open('http://vk.com/' + task.url, '', 'width=900, height=600, top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 900) / 2) + ', resizable=yes, scrollbars=yes, status=yes');
+        task.timer = setInterval(function () {
+            if (task.win.closed) {
+                clearInterval(task.timer);
+                $scope.checkTask(task);
+            }
+        }, 100);
     };
 
 

@@ -14,9 +14,9 @@ class Task extends Model {
     protected $ownerId;
     protected $type;
     protected $url;
-    protected $amount;
+    protected $price;
     protected $count;
-    protected $doneCount;
+    protected $doneCount = 0;
     protected $status = Defines::STATUS_ENABLED;
     protected $createDate;
 
@@ -44,11 +44,11 @@ class Task extends Model {
     public function setUrl($url) {
         $this->url = $url;
     }
-    public function getAmount() {
-        return $this->amount;
+    public function getPrice() {
+        return $this->price;
     }
-    public function setAmount($amount) {
-        $this->amount = $amount;
+    public function setPrice($price) {
+        $this->price = $price;
     }
     public function getCount() {
         return $this->count;

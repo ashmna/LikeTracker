@@ -24,7 +24,7 @@ CREATE TABLE `tasks` (
   `ownerId`    INT(11)    NOT NULL,
   `type`       ENUM('like', 'group', 'friend', 'share', 'poll', 'comment', 'video') NOT NULL,
   `url`        INT(11)    NOT NULL,
-  `amount`     INT(3)     NOT NULL DEFAULT 0,
+  `price`      INT(3)     NOT NULL DEFAULT 0,
   `commission` INT(3)     NOT NULL DEFAULT 0,
   `count`      INT(5)     NOT NULL DEFAULT 0,
   `doneCount`  INT(5)     NOT NULL DEFAULT 0,

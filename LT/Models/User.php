@@ -12,9 +12,9 @@ class User extends Model {
     protected $partnerId;
     protected $vkId;
     protected $lastLoginDate;
-    protected $balance;
-    protected $rating;
-    protected $status = Defines::STATUS_ENABLED;
+    protected $balance = 0;
+    protected $rating  = 0;
+    protected $status  = Defines::STATUS_ENABLED;
 
     public function getVkId() {
         return $this->vkId;
