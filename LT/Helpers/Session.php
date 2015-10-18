@@ -10,6 +10,7 @@ namespace LT\Helpers;
  * @property bool $isLogged
  * @property string $language
  * @property \LT\Models\User|null $user
+ * @property array vkData
  */
 class Session {
     private $session;

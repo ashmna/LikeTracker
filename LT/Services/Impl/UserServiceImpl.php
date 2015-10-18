@@ -21,8 +21,14 @@ class UserServiceImpl implements UserService {
      */
     protected $userDao;
 
+
+    /**
+     * @Inject
+     * @var \LT\Services\VkService
+     */
+    protected $vkService;
+
     public function login($vkId) {
-        echo($vkId);
         $user = new User();
         $user->setVkId($vkId);
         $user->setLastLoginDate(date('Y-m-d H:i:s'));
@@ -30,6 +36,7 @@ class UserServiceImpl implements UserService {
         $session = App::getSession();
         $session->isLogged = true;
         $session->user = $user;
+        $session->vkData = $this->vkService->getUser($vkId);
         return App::isLoggedUser();
     }
 

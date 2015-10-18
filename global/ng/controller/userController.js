@@ -21,11 +21,12 @@ function ($scope, userServices) {
         VK.init({
             apiId: apiId
         });
-        VK.Auth.getLoginStatus(authInfo);
+        //VK.Auth.getLoginStatus(authInfo);
         VK.UI.button('login_button');
     };
-
-    $scope.authInfo = authInfo;
+    $scope.login = function () {
+        VK.Auth.login(authInfo);
+    };
 
 }]);
 

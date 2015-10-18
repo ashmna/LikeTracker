@@ -54,7 +54,7 @@ class TaskImpl implements \LT\DAO\Task {
         ];
         $taskData = $this->db->select('tasks', 'partnerId = :partnerId AND taskId = :taskId', $bind);
         if(count($taskData) == 1) {
-            $task = new Task($taskData);
+            $task = new Task($taskData[0]);
         }
         return $task;
     }

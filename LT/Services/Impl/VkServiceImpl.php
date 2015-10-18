@@ -11,18 +11,22 @@ class VkServiceImpl implements VkService
 
     public function isLiked($vkId, $url) {
         $result = false;
-        list($type, $ownerId, $itemId) = $this->parsUrl($url);
-        $params = [
-            'type'     => $type,
-            'owner_id' => $ownerId,
-            'item_id'  => $itemId,
-            'filter'   => 'likes'
-        ];
-        $response = $this->getMethodResult('likes.isLiked', $params);
-        if(!isset($response['error'])
-            && !empty($response['response'])
-            && !empty($response['response']['users'])) {
-            $result = in_array($vkId, $response['response']['users']);
+        preg_match("/([-a-z]*)(\w*)_(\w*)/", $url, $matches);
+        if(isset($matches)) {
+            list($url, $type, $ownerId, $itemId) = $matches;
+
+            $params = [
+                'type'     => $type,
+                'owner_id' => $ownerId,
+                'item_id'  => $itemId,
+                'filter'   => 'likes'
+            ];
+            $response = $this->getMethodResult('likes.getList', $params);
+            if(!isset($response['error'])
+                && !empty($response['response'])
+                && !empty($response['response']['users'])) {
+                $result = in_array($vkId, $response['response']['users']);
+            }
         }
         return $result;
     }
@@ -44,7 +48,7 @@ class VkServiceImpl implements VkService
 
     public function isFriend($vkId, $url) {
         $result = false;
-        list($userId) = $this->parsUrl($url);
+        //list($userId) = $this->parsUrl($url);
         $params = [
             'user_id' => $userId,
         ];
@@ -63,13 +67,18 @@ class VkServiceImpl implements VkService
 
     //polls.getVoters
 
-
-    private function parsUrl($url) {
-        $type = '';
-        $ownerId = 0;
-        $itemId  = 0;
-        // TODO: Implement parsUrl() method.
-        return [$type, $ownerId, $itemId];
+    public function getUser($vkId) {
+        $params = [
+            'user_ids' => $vkId,
+            'fields'   => 'photo_100',
+        ];
+        $response = $this->getMethodResult('users.get', $params);
+        if(!isset($response['error']) && !empty($response['response'])) {
+            $response = $response['response'][0];
+        } else {
+            $response = [];
+        }
+        return $response;
     }
 
     private function getMethodResult($method, $params) {
@@ -77,8 +86,8 @@ class VkServiceImpl implements VkService
         foreach($params as $k=>$v) {
             $arr[] = "$k=$v";
         }
-        $url = $this->vkUrl.$method.'/?'.implode('&', $arr);
+        $url = $this->vkUrl.$method.'?'.implode('&', $arr);
         $response = file_get_contents($url);
-        return json_encode($response, true);
+        return json_decode($response, true);
     }
 }

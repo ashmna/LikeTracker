@@ -11,8 +11,6 @@ namespace {
             'rating',
             'task-list',
             'my-tasks',
-            'my-tasks-ex1',
-            'my-tasks-new',
             'terms-and-conditions',
         ];
     } else {

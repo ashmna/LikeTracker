@@ -13,7 +13,7 @@
 					<center style="padding-top:15px;">
 						Чтобы начать работать с сайтом, введите ссылку<br>
 						на Вашу страничку ВКонтакте:
-						<div id="login_button" onclick="VK.Auth.login(authInfo);" ></div>
+						<div id="login_button" ng-click="login()"></div>
 					<br></center>
 					<hr>
 					<br>

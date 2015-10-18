@@ -23,7 +23,7 @@ CREATE TABLE `tasks` (
   `taskId`     INT(11)    NOT NULL AUTO_INCREMENT,
   `ownerId`    INT(11)    NOT NULL,
   `type`       ENUM('like', 'group', 'friend', 'share', 'poll', 'comment', 'video') NOT NULL,
-  `url`        INT(11)    NOT NULL,
+  `url`        VARCHAR(255) NOT NULL,
   `price`      INT(3)     NOT NULL DEFAULT 0,
   `commission` INT(3)     NOT NULL DEFAULT 0,
   `count`      INT(5)     NOT NULL DEFAULT 0,

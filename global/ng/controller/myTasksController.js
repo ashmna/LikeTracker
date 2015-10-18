@@ -28,9 +28,43 @@ function ($scope, $location, taskService) {
             infoClass : 'info'
         }
     };
+    var convertUrl = function (url) {
+        var res = '';
+        var pos = url.indexOf('vk.com/');
+
+        if(pos != -1) {
+            url = url.substr(pos+7);
+            pos = url.indexOf('?');
+            if(pos != -1) {
+                url = url.substr(pos+1);
+                var pair, obj  = {}, vars = url.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    pair = vars[i].split('=');
+                    obj[pair[0]] = pair[1];
+                }
+                if(obj['z']) {
+                    res = url = obj['z'];
+                } else if(obj['w']) {
+                    res = url = obj['w'];
+                }
+                pos = url.indexOf('%2F');
+                if(pos != -1) {
+                    res = url.substr(0, pos);
+                } else {
+                    pos = url.indexOf('/');
+                    if(pos != -1) {
+                        res = url.substr(0, pos);
+                    }
+                }
+            } else {
+                res = url;
+            }
+        }
+        return res;
+    };
     var checkTask = function(callBake) {
         var res = true;
-        if(!$scope.currentTask.price || !$scope.currentTask.count || !$scope.currentTask.url) {
+        if(!$scope.currentTask.price || !$scope.currentTask.count || !$scope.currentTask.originalUrl) {
             $scope.currentTask.info = 'Пожалуйста, заполните все поля.';
             res = false;
         }
@@ -42,6 +76,10 @@ function ($scope, $location, taskService) {
             $scope.currentTask.info = 'Заказ должен быть хотя бы на 10 лайков, как минимум.';
             res = false;
         }
+        else if(!$scope.currentTask.url) {
+            $scope.currentTask.info = 'Вы ввели ссылку не правильно. Ссылка должна иметь такой вид, как на следующих примерах:<br>https://vk.com/wall345678_12345<br>https://vk.com/photo345678_12345<br>https://vk.com/video345678_12345';
+            res = false;
+        }
         if(!res) {
             $scope.currentTask.infoClass = 'info2';
         } else {
@@ -51,7 +89,7 @@ function ($scope, $location, taskService) {
         if(callBake) {
             callBake(res);
         }
-        //'Вы ввели ссылку не правильно. Ссылка должна иметь такой вид, как на следующих примерах:<br>https://vk.com/wall345678_12345;<br>photo345678_12345;<br>video345678_12345.'
+        //
         //'Запись не найдена или защищена настройками приватности. Проверьте существует ли запись или откройте к ней доступ для всех пользователей.'
         //'Фотография не найдена или защищена настройками приватности. Проверьте существует ли фотография или откройте к ней доступ для всех пользователей.'
         //'Видеозапись не найдена или защищена настройками приватности. Проверьте существует ли видеозапись или откройте к ней доступ для всех пользователей.'
@@ -109,15 +147,18 @@ function ($scope, $location, taskService) {
 
     $scope.saveCurrentTask = function() {
         $scope.currentTask.type = $scope.type;
+        $scope.currentTask.url = convertUrl($scope.currentTask.originalUrl);
         checkTask(function(res){
-            taskService.createTask($scope.currentTask)
-                .success(function (data) {
-                    if(data.status && data.result) {
-                        newTask();
-                        $scope.currentTask.infoClass = 'okey';
-                        $scope.currentTask.info = '<font color = "green"><b>Заказ успешно добавлен в <a href="#'+$scope.type+'">список Ваших заданий</a>!</b></font>';
-                    }
-                });
+            if(res) {
+                taskService.createTask($scope.currentTask)
+                    .success(function (data) {
+                        if (data.status && data.result) {
+                            newTask();
+                            $scope.currentTask.infoClass = 'okey';
+                            $scope.currentTask.info = '<font color = "green"><b>Заказ успешно добавлен в <a href="#' + $scope.type + '">список Ваших заданий</a>!</b></font>';
+                        }
+                    });
+            }
         });
     };
 

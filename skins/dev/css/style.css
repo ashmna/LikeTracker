@@ -322,8 +322,7 @@ hr {
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    background-image: url(../img/white_grad.png);
-    background-repeat: repeat-x;
+    background: url(../img/white_grad.png) repeat-x;
     font-family: Arial, tahoma;
     font-weight: bold;
     font-size: 12px;
@@ -347,9 +346,7 @@ hr {
 }
 
 .head_1 {
-    background-image: url(img/head_1.png);
-    background-repeat: no-repeat;
-    background-position: 30% top;
+    background: url(../img/head_1.png) no-repeat 30% top;
 }
 
 .head_2 {
