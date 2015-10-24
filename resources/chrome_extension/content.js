@@ -51,8 +51,10 @@
 
 
     function main() {
+        console.log('main', window.location.href);
         var url = convertUrl(window.location.href);
         if(url) {
+            console.log(url);
             var request = {
                 cmd : 'lt.task.get',
                 url : url
@@ -67,7 +69,33 @@
 
     }
 
+    //window.lt.task.add = function(task, callBack){
+    //    chrome.extension.sendMessage({cmd:'lt.task.add', task:task}, callBack);
+    //};
+    //window.lt.task.remove = function(task, callBack){
+    //    chrome.extension.sendMessage({cmd:'lt.task.remove', task:task}, callBack);
+    //};
 
+    document.addEventListener('ltIsExist', function(event){
+        var ev = new CustomEvent('ltIsExistCallBack', {detail:true});
+        document.dispatchEvent(ev);
+    }, false);
+
+    document.addEventListener('ltTaskAdd', function(event){
+        //console.log('ltTaskAdd', event.detail);
+        chrome.extension.sendMessage({cmd:'lt.task.add', task:event.detail}, function(res){
+            var ev = new CustomEvent('ltTaskAddCallBack', {detail:res});
+            document.dispatchEvent(ev);
+        });
+    }, false);
+
+    document.addEventListener('ltTaskRemove', function(event){
+        //console.log('ltTaskRemove', event.detail);
+        chrome.extension.sendMessage({cmd:'lt.task.remove', task:event.task}, function(res){
+            var ev = new CustomEvent('ltTaskRemoveCallBack', {detail:res});
+            document.dispatchEvent(ev);
+        });
+    }, false);
 
 })();
 

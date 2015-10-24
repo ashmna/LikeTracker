@@ -8,6 +8,7 @@ function ($scope, $location, taskService) {
 
     var tasksData = {};
     var tasksListLimit = 15;
+    var isExistExtension = false;
 
     $scope.$watch('$location.$$path', function() {
         $scope.tab = $location.$$path.replace('/', '');
@@ -17,6 +18,13 @@ function ($scope, $location, taskService) {
         $scope.currentTaskList = [];
         $scope.checkTasksData();
     });
+
+    $scope.init = function() {
+        setTimeout(function(){
+            var ev = new CustomEvent('ltIsExist');
+            document.dispatchEvent(ev);
+        },100);
+    };
 
     $scope.checkTasksData = function() {
         var count = 0, type = $scope.tab.replace('/', '');
@@ -66,19 +74,55 @@ function ($scope, $location, taskService) {
             });
     };
     $scope.doTask = function(task) {
-        task.win = window.open('http://vk.com/' + task.url, '', 'width=900, height=600, top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 900) / 2) + ', resizable=yes, scrollbars=yes, status=yes');
-        $(task.win).click(function(e){
-            console.log(e);
-        });
-        task.timer = setInterval(function () {
-            if (task.win.closed) {
-                clearInterval(task.timer);
-                $scope.checkTask(task);
-            } else {
-                console.log(task.win.apps_delete_admin_title);
-            }
-        }, 100);
+        var open = function(callBack){
+            task.win = window.open('http://vk.com/' + task.url, '', 'width=900, height=600, top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 900) / 2) + ', resizable=yes, scrollbars=yes, status=yes');
+            task.timer = setInterval(function () {
+                if (task.win.closed) {
+                    clearInterval(task.timer);
+                    if(callBack)  {
+                        callBack(task);
+                    } else {
+                        $scope.checkTask(task);
+                    }
+                }
+            }, 100);
+        };
+
+        if(isExistExtension) {
+            var ev1 = new CustomEvent('ltTaskAdd', {detail:task});
+            $scope.ltTaskAdd = function(res) {
+                open(function (task) {
+                    $scope.ltTaskRemove = function(res) {
+                        if(task.type == 'video') {
+                            task.watvhDuration = res.watvhDuration || 0;
+                        }
+                        $scope.checkTask(task);
+                    };
+                    var ev2 = new CustomEvent('ltTaskRemove', {detail:task});
+                    document.dispatchEvent(ev2);
+                });
+            };
+            document.dispatchEvent(ev1);
+        } else {
+            open();
+        }
     };
+
+    document.addEventListener("ltIsExistCallBack", function(event){
+        isExistExtension = event.detail;
+        //console.log('isExistExtension', isExistExtension);
+    }, false);
+
+    document.addEventListener("ltTaskAddCallBack", function(event){
+        $scope.ltTaskAdd(event.detail);
+        //console.log('ltTaskAddCallBack', event);
+    }, false);
+
+
+    document.addEventListener("ltTaskRemoveCallBack", function(event){
+        $scope.ltTaskRemove(event.detail);
+        //console.log('ltTaskRemoveCallBack', event);
+    }, false);
 
 
 

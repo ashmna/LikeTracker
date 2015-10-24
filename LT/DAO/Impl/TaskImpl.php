@@ -38,7 +38,7 @@ class TaskImpl implements \LT\DAO\Task {
         $query = "SELECT tasks.* FROM tasks
                  LEFT JOIN users_tasks ut ON (tasks.taskId = ut.taskId AND ut.userId = :userId)
                 WHERE tasks.partnerId = :partnerId
-                  AND tasks.ownerId   = :userId
+                  AND tasks.ownerId  != :userId
                   AND ut.isDone IS NULL
                   {$where}
                 ORDER BY tasks.price DESC

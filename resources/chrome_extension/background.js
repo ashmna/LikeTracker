@@ -1,4 +1,6 @@
 (function(){
+    console.log('background.js');
+
     var taskList = {};
 
     function addTask(task) {
@@ -12,10 +14,11 @@
 
     function removeTask(task) {
         if(task && taskList[task.url]) {
+            var resTask = taskList[task.url];
             delete taskList[task.url];
-            return true;
+            return resTask;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -39,12 +42,15 @@
         switch (request.cmd) {
             case "lt.task.add":
                 callback(addTask(task));
+                console.log('lt.task.add');
                 break;
             case "lt.task.remove":
                 callback(removeTask(task));
+                console.log('lt.task.remove');
                 break;
             case "lt.task.get":
                 callback(getTask(request.url));
+                console.log('lt.task.get');
                 break;
         }
 

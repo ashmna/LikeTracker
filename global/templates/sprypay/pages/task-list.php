@@ -1,4 +1,4 @@
-<table style="height:100%;width:800px; border-collapse: collapse;" ng-controller="taskListController" ng-cloak>
+<table style="height:100%;width:800px; border-collapse: collapse;" ng-controller="taskListController" ng-init="init()" ng-cloak>
     <tbody>
     <tr>
         <td valign="top" style="height:100%;width:25%;">
