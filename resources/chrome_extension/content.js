@@ -54,13 +54,18 @@
         console.log('main', window.location.href);
         var url = convertUrl(window.location.href);
         if(url) {
-            console.log(url);
+            //console.log(url);
             var request = {
                 cmd : 'lt.task.get',
                 url : url
             };
             chrome.extension.sendMessage(request, function(task) {
                 if(task) {
+                    var videoBoxWrap = document.querySelector('.video_box_wrap');
+                    videoBoxWrap.addEventListener('onclick', function(event){
+                        task.watchStart = (new Date()).getSeconds();
+                    }, false);
+
                     console.log(task);
                 }
             });
