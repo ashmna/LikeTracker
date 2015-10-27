@@ -3,6 +3,7 @@
 namespace LT\Services\Impl;
 
 
+use LT\Models\Task;
 use LT\Services\VkService;
 
 class VkServiceImpl implements VkService
@@ -80,6 +81,11 @@ class VkServiceImpl implements VkService
         }
         return $response;
     }
+
+    public function isWatchVideo(Task $task, $watchDuration) {
+        return $watchDuration > 10;
+    }
+
 
     private function getMethodResult($method, $params) {
         $arr = [];

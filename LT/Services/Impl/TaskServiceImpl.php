@@ -39,7 +39,7 @@ class TaskServiceImpl implements TaskService
         return $this->taskDao->ignoreTask($taskId);
     }
 
-    public function checkTask($taskId) {
+    public function checkTask($taskId, $watchDuration = -1) {
         $task = $this->taskDao->getTaskById($taskId);
         $isDone = false;
         $vkId = App::getUserId();
@@ -62,11 +62,12 @@ class TaskServiceImpl implements TaskService
                 case Defines::TASK_TYPE_COMMENT:
                     break;
                 case Defines::TASK_TYPE_VIDEO:
+                    $isDone = $this->vkService->isWatchVideo($task, $watchDuration);
                     break;
             }
         }
         if($isDone) {
-           // $this->taskDao->doTask($task->getTaskId());
+            $this->taskDao->doTask($task->getTaskId());
         }
         return $isDone;
     }

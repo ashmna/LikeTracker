@@ -33,10 +33,11 @@ app.service('taskService', ['serverConnector', function (serverConnector) {
         });
     };
 
-    this.checkTask = function (taskId) {
+    this.checkTask = function (taskId, watchDuration) {
+        watchDuration = watchDuration || -1;
         return serverConnector.send({
             url : url('check-task'),
-            data: {taskId:taskId}
+            data: {taskId:taskId, watchDuration:watchDuration}
         });
     };
 

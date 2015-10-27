@@ -11,5 +11,5 @@ interface TaskService
     function getTasks($type, $count);
     function getMyTasks($type);
     function ignoreTask($taskId);
-    function checkTask($taskId);
+    function checkTask($taskId, $watchDuration = -1);
 }

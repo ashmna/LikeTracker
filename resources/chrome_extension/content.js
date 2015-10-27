@@ -51,22 +51,27 @@
 
 
     function main() {
-        console.log('main', window.location.href);
+        //console.log('main', window.location.href);
         var url = convertUrl(window.location.href);
         if(url) {
-            //console.log(url);
+            ////console.log(url);
             var request = {
                 cmd : 'lt.task.get',
                 url : url
             };
             chrome.extension.sendMessage(request, function(task) {
                 if(task) {
+                    var isStartWatch = false;
                     var videoBoxWrap = document.querySelector('.video_box_wrap');
-                    videoBoxWrap.addEventListener('onclick', function(event){
-                        task.watchStart = (new Date()).getSeconds();
+                    videoBoxWrap.addEventListener('click', function(event){
+                        if(!isStartWatch)
+                            chrome.extension.sendMessage({cmd:'lt.task.startWatch', task:task}, function(res) {
+                                console.log(res);
+                                isStartWatch = true;
+                            });
                     }, false);
 
-                    console.log(task);
+                    //console.log(task);
                 }
             });
         }
@@ -87,7 +92,7 @@
     }, false);
 
     document.addEventListener('ltTaskAdd', function(event){
-        //console.log('ltTaskAdd', event.detail);
+        ////console.log('ltTaskAdd', event.detail);
         chrome.extension.sendMessage({cmd:'lt.task.add', task:event.detail}, function(res){
             var ev = new CustomEvent('ltTaskAddCallBack', {detail:res});
             document.dispatchEvent(ev);
@@ -95,8 +100,8 @@
     }, false);
 
     document.addEventListener('ltTaskRemove', function(event){
-        //console.log('ltTaskRemove', event.detail);
-        chrome.extension.sendMessage({cmd:'lt.task.remove', task:event.task}, function(res){
+        ////console.log('ltTaskRemove', event.detail);
+        chrome.extension.sendMessage({cmd:'lt.task.remove', task:event.detail}, function(res){
             var ev = new CustomEvent('ltTaskRemoveCallBack', {detail:res});
             document.dispatchEvent(ev);
         });

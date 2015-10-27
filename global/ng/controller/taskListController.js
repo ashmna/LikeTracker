@@ -62,7 +62,7 @@ function ($scope, $location, taskService) {
     $scope.checkTask = function(task) {
         task.btn = task.btn || {};
         task.btn.title = '...';
-        taskService.checkTask(task.taskId)
+        taskService.checkTask(task.taskId, task.watchDuration)
             .success(function(data){
                 if(data.status && data.result) {
                     task.btn.title = 'Выполнено';
@@ -93,8 +93,9 @@ function ($scope, $location, taskService) {
             $scope.ltTaskAdd = function(res) {
                 open(function (task) {
                     $scope.ltTaskRemove = function(res) {
-                        if(task.type == 'video') {
-                            task.watvhDuration = res.watvhDuration || 0;
+                        if(res && res.type == 'video') {
+                            res.watchEnd = (new Date()).getTime();
+                            task.watchDuration = Math.ceil((res.watchEnd - res.watchStart)/1000);
                         }
                         $scope.checkTask(task);
                     };
