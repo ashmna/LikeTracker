@@ -7,7 +7,7 @@ namespace LT\DAO\Impl;
 
 use LT\Helpers\App;
 use LT\Models\Task;
-use MD\Models\UserTask;
+use LT\Models\UserTask;
 
 class TaskImpl implements \LT\DAO\Task {
 
@@ -71,14 +71,34 @@ class TaskImpl implements \LT\DAO\Task {
         $userTask->setCreateDate(date('Y-m-d H:i:s'));
 
         $this->db->insert('users_tasks', $userTask->toArray());
+        $givenAmount = $task->getPrice();
+        $commission  = $task->getCommission();
+        $takenAmount = $givenAmount + $commission;
+        $query = "UPDATE users SET
+                  users.balance = users.balance - :takenAmount,
+                  users.reating = users.reating + 2
+                  WHERE partnerId = :partnerId AND users.vkId = :ownerId;
+                  UPDATE users SET
+                  users.balance = users.balance + :givenAmount,
+                  users.reating = users.reating + 1
+                  WHERE partnerId = :partnerId AND users.vkId = :userId;
+                  UPDATE tasks SET
+                  tasks.doneCount = tasks.doneCount + 1,
+                  tasks.givenAmount = :givenAmount,
+                  tasks.takenAmount = :takenAmount,
+                  tasks.commission  = :commission
+                  WHERE partnerId = :partnerId AND taskId = :taskId;";
 
-        $query = "UPDATE tasks
-                     SET doneCount = tasks.doneCount + 1
-                   WHERE partnerId = :partnerId AND taskId = :taskId";
         $bind = [
-            'partnerId' => App::getPartnerId(),
-            'task'      => $taskId
+            'partnerId'   => App::getPartnerId(),
+            'ownerId'     => $task->getOwnerId(),
+            'userId'      => App::getUserId(),
+            'givenAmount' => $givenAmount,
+            'takenAmount' => $takenAmount,
+            'commission'  => $commission,
+            'taskId'      => $task->getTaskId(),
         ];
+
         return $this->db->run($query, $bind);
     }
 

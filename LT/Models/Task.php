@@ -15,6 +15,7 @@ class Task extends Model {
     protected $type;
     protected $url;
     protected $price;
+    protected $commission;
     protected $count;
     protected $doneCount = 0;
     protected $status = Defines::STATUS_ENABLED;
@@ -49,6 +50,12 @@ class Task extends Model {
     }
     public function setPrice($price) {
         $this->price = $price;
+    }
+    public function getCommission() {
+        return $this->commission;
+    }
+    public function setCommission($commission) {
+        $this->commission = $commission;
     }
     public function getCount() {
         return $this->count;

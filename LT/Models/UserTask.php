@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MD\Models;
+namespace LT\Models;
 
 
 use LT\Helpers\Model;
