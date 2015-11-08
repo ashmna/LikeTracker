@@ -16,6 +16,10 @@ class VkServiceImpl implements VkService
         if(isset($matches)) {
             list($url, $type, $ownerId, $itemId) = $matches;
 
+            if($type == 'wall') {
+                $type = 'post';
+            }
+
             $params = [
                 'type'     => $type,
                 'owner_id' => $ownerId,
