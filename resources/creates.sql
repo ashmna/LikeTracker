@@ -9,7 +9,7 @@ CREATE TABLE `users` (
   `vkId`          INT(11)    NOT NULL,
   `lastLoginDate` DATETIME   NOT NULL,
   `balance`       INT(11)    NOT NULL,
-  `reating`       INT(11)    NOT NULL,
+  `rating`        INT(11)    NOT NULL,
   `status`        TINYINT(1) NOT NULL DEFAULT 1,
 
   PRIMARY KEY (`partnerId`, `vkId`)

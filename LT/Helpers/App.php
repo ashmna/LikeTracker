@@ -196,12 +196,12 @@ class App {
         self::$page = $page;
     }
 
-    public static function getCounterNextIndex($counterName) {
-        $app = self::getInstance();
-        /** @var \LT\DAO\Counter $counterDAO */
-        $counterDAO = $app->container->get('LT\DAO\Counter');
-        return $counterDAO->getNextIndex($counterName);
-    }
+//    public static function getCounterNextIndex($counterName) {
+//        $app = self::getInstance();
+//        /** @var \LT\DAO\Counter $counterDAO */
+//        $counterDAO = $app->container->get('LT\DAO\Counter');
+//        return $counterDAO->getNextIndex($counterName);
+//    }
 
     /*************** USER ***************/
     /**
@@ -234,6 +234,12 @@ class App {
 //        }
 //        return $role;
         return Defines::ROLE_ADMIN;
+    }
+    public static function getUserData() {
+        $app = self::getInstance();
+        /** @var \LT\Services\UserService $userDAO */
+        $userDAO = $app->container->get('LT\Services\UserService');
+        return $userDAO->getUserData();
     }
 
     public static function redirectHandler() {

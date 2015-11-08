@@ -76,11 +76,11 @@ class TaskImpl implements \LT\DAO\Task {
         $takenAmount = $givenAmount + $commission;
         $query = "UPDATE users SET
                   users.balance = users.balance - :takenAmount,
-                  users.reating = users.reating + 2
+                  users.rating = users.rating + 2
                   WHERE partnerId = :partnerId AND users.vkId = :ownerId;
                   UPDATE users SET
                   users.balance = users.balance + :givenAmount,
-                  users.reating = users.reating + 1
+                  users.rating = users.rating + 1
                   WHERE partnerId = :partnerId AND users.vkId = :userId;
                   UPDATE tasks SET
                   tasks.doneCount = tasks.doneCount + 1,

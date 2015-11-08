@@ -1,6 +1,9 @@
 <?php
 use LT\Helpers\App;
 $vkData = App::getSession()->vkData;
+$userData = App::getUserData();
+$rating  = isset($userData['rating']) ? $userData['rating'] : 0;
+$balance = isset($userData['balance']) ? $userData['balance'] : 0;
 ?>
 <table>
     <tbody>
@@ -19,8 +22,8 @@ $vkData = App::getSession()->vkData;
 
 <hr>
 
-<img src="/img/rating.png"> Рейтинг: <b id="rat">9</b><br>
-<img src="/img/balls.png"> Баллов: <b id="bal">204</b>
+<img src="/img/rating.png"> Рейтинг: <b id="rat"><?= $rating ?></b><br>
+<img src="/img/balls.png"> Баллов: <b id="bal"><?= $balance ?></b>
 <a href="http://snebes.ru/buy_balls.php">
 <img src="/img/plus.png"> <b>Купить баллы</b>
 </a>

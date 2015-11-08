@@ -7,4 +7,5 @@ interface UserService
 {
     function login($vkId);
     function logout();
+    function getUserData();
 }

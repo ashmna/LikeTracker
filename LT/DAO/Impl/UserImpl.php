@@ -4,6 +4,7 @@
 namespace LT\DAO\Impl;
 
 
+use LT\Helpers\Config;
 use LT\Models\User;
 
 class UserImpl implements \LT\DAO\User
@@ -20,4 +21,19 @@ class UserImpl implements \LT\DAO\User
         ];
         return $this->db->insertOrUpdateDataSet('users', $usersData, ['lastLoginDate']);
     }
+
+    public function getUserData($vkId) {
+        $bind = [
+            'vkId' => $vkId,
+            'partnerId' => Config::getInstance()->partnerId,
+        ];
+        $data = [];
+        $res = $this->db->select('users', 'partnerId = :partnerId AND vkId = :vkId', $bind);
+        if(count($res) == 1) {
+            $data = $res[0];
+        }
+        return $data;
+    }
+
+
 }

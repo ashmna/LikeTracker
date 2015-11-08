@@ -45,5 +45,9 @@ class UserServiceImpl implements UserService {
         $session->isLogged = false;
     }
 
+    public function getUserData() {
+        return $this->userDao->getUserData(App::getUserId());
+    }
+
 
 }

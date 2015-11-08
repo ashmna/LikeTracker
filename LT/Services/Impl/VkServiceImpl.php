@@ -12,7 +12,7 @@ class VkServiceImpl implements VkService
 
     public function isLiked($vkId, $url) {
         $result = false;
-        preg_match("/([-a-z]*)(\w*)_(\w*)/", $url, $matches);
+        preg_match("/([a-z]*)([-0-9]*)_(\w*)/", $url, $matches);
         if(isset($matches)) {
             list($url, $type, $ownerId, $itemId) = $matches;
 
