@@ -218,7 +218,7 @@ class App {
      * @return bool
      * @throws \LT\Exceptions\ConfigurationException
      */
-    public static function isLoggedUser() { return true;
+    public static function isLoggedUser() {
         $config = Config::getInstance();
         if($config->test) return true;
         $session = self::getSession();
