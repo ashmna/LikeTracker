@@ -15,8 +15,9 @@
                     <a href="#group"   ng-class="tab=='group'   ? 'title_select' : ''">Сообщества</a>
                     <a href="#friend"  ng-class="tab=='friend'  ? 'title_select' : ''">Друзья</a>
                     <a href="#share"   ng-class="tab=='share'   ? 'title_select' : ''">Репосты</a>
-                    <a href="#poll"    ng-class="tab=='poll'    ? 'title_select' : ''">Опросы</a>
-                    <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>
+                    <!--<a href="#poll"    ng-class="tab=='poll'    ? 'title_select' : ''">Опросы</a>
+                    <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>-->
+                    <a href="#video"   ng-class="tab=='video'   ? 'title_select' : ''">Видео</a>
                     <!--<a href="#my_tasks">Мои задания</a>-->
                 </div>
                 <div class="line_block">

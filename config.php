@@ -37,6 +37,7 @@ return [
 
     'languages'          => [
         "en_GB" => "English",
+        "ru_RU" => "Russian",
     ],
 
 

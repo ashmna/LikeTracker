@@ -57,6 +57,16 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+        potomo: {
+            dist: {
+                options: {
+                    poDel: true
+                },
+                files: {
+                    'global/locale/ru_RU/LC_MESSAGES/main.mo' : 'global/locale/ru_RU/LC_MESSAGES/main.po'
+                }
+            }
         }
 
 
@@ -66,13 +76,15 @@ module.exports = function(grunt) {
     //grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-potomo');
     //grunt.loadNpmTasks('grunt-contrib-cssmin');
     //grunt.loadNpmTasks('grunt-angular-gettext');
     //grunt.loadNpmTasks('grunt-potomo');
 
 
 
-    grunt.registerTask('build', ['concat', 'uglify']);
+    //grunt.registerTask('default', ['concat', 'uglify', 'potomo']);
+    grunt.registerTask('default', ['potomo']);
 
 
 

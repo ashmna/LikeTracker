@@ -24,16 +24,20 @@ $balance = isset($userData['balance']) ? $userData['balance'] : 0;
 
 <img src="/img/rating.png"> Рейтинг: <b id="rat"><?= $rating ?></b><br>
 <img src="/img/balls.png"> Баллов: <b id="bal"><?= $balance ?></b>
-<a href="http://snebes.ru/buy_balls.php">
+
+<!--<a href="#">
 <img src="/img/plus.png"> <b>Купить баллы</b>
 </a>
+-->
 
 <hr>
-<a href="">Заработать баллы</a>
-<a href="">Потратить баллы</a>
+<a href="/page/task-list/">Заработать баллы</a>
+<a href="/page/my-tasks/">Потратить баллы</a>
+<!--
 <a href="">Перевод баллов</a>
 <a href="">Партнерская программа</a>
 <a href="">Новости</a>
 <a href="">Журнал</a>
 <a href="">Служба поддержки</a>
-<a href="">Правила</a>
+-->
+<a href="/page/terms-and-conditions/">Правила</a>

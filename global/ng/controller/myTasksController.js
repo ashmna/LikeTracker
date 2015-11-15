@@ -18,7 +18,7 @@ function ($scope, $location, taskService) {
         'share'  : 'Рассказать друзьям',
         'poll'   : 'Опрос',
         'comment': 'Комментарии',
-        'video'  : 'Video'
+        'video'  : 'Видео'
     };
     var newTask = function() {
         $scope.currentTask = {

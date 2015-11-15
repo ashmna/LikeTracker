@@ -15,9 +15,9 @@
                     <a href="#group"   ng-class="tab=='group'   ? 'title_select' : ''">Сообщества</a>
                     <a href="#friend"  ng-class="tab=='friend'  ? 'title_select' : ''">Друзья</a>
                     <a href="#share"   ng-class="tab=='share'   ? 'title_select' : ''">Репосты</a>
-                    <a href="#poll"    ng-class="tab=='poll'    ? 'title_select' : ''">Опросы</a>
-                    <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>
-                    <a href="#video"   ng-class="tab=='video'   ? 'title_select' : ''">Video</a>
+                    <!-- <a href="#poll"    ng-class="tab=='poll'    ? 'title_select' : ''">Опросы</a>
+                     <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>-->
+                    <a href="#video"   ng-class="tab=='video'   ? 'title_select' : ''">Видео</a>
                     <a href="#new"     ng-class="tab=='new'     ? 'title_select' : ''">Новое</a>
                 </div>
                 <div class="line_block" ng-hide="tab=='new'">
@@ -91,7 +91,7 @@
                             </a>
                         </div>
                     </center>
-
+<!--
                     <center>
                         <div class="button_1">
                             <a href="#/new/poll">
@@ -106,7 +106,16 @@
                                 Накрутить <b>"Комментарии"</b>
                             </a>
                         </div>
+                    </center>-->
+
+                    <center>
+                        <div class="button_1">
+                            <a href="#/new/video">
+                                Накрутить <b>"Видео"</b>
+                            </a>
+                        </div>
                     </center>
+
                 </div>
 
                 <div class="line_block" ng-show="tab=='new' && type">

@@ -111,7 +111,7 @@ class Config {
         }
         static::$instance = new static($config);
         App::getInstance();
-//        self::$instance->initLocale();
+        self::$instance->initLocale();
 //        self::$instance->initReferralId();
     }
 
@@ -175,28 +175,24 @@ class Config {
     }
 
     public function initLocale() {
-//        $directory = self::getGlobalDir().'/locale';
-//        $domain = 'main';
-//
-//        $localeCode = App::getLocale();
-//
-//        $locale=$this->languagesCode[$localeCode];
-//
-//        if($this->useSession) {
-//            setcookie("languageCode", $localeCode, 0, '/');
-//            setcookie("language", $locale, 0, '/');
-//        }
-//
-//        putenv("LANG=".$localeCode);
-//        setlocale(LC_ALL, $localeCode);
-//
-//        if ($localeCode == 'tr_TR') {
-//            setlocale(LC_CTYPE,'en_GB');
-//        }
-//
-//        bindtextdomain($domain, $directory);
-//        textdomain($domain);
-//        bind_textdomain_codeset($domain, 'UTF-8');
+        $directory = self::getGlobalDir().'/locale';
+        $domain = 'main';
+
+        $localeCode = App::getLocale();
+
+        $locale = $this->languagesCode[$localeCode];
+
+        if($this->useSession) {
+            setcookie("languageCode", $localeCode, 0, '/');
+            setcookie("language", $locale, 0, '/');
+        }
+
+        putenv("LANG=".$localeCode);
+        setlocale(LC_ALL, $localeCode);
+
+        bindtextdomain($domain, $directory);
+        textdomain($domain);
+        bind_textdomain_codeset($domain, 'UTF-8');
     }
 
     public function initReferralId() {

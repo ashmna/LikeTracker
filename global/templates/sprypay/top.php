@@ -12,7 +12,7 @@ $menu = include 'menu.php';
                 </div>
 
                 <?php foreach($menu as $item) { ?>
-                    <a href="/page/<?= $item ?>/" <?= $page == $item ? "class='head_nav_sellect'" :"" ?> ><b><?= _($item) ?></b></a>
+                    <a href="/page/<?= $item ?>/" <?= $page == $item ? "class='head_nav_sellect'" :"" ?> ><b><?= App::t($item) ?></b></a>
                 <?php } ?>
 
             </div>

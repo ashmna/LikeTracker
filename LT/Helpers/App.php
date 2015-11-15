@@ -218,7 +218,7 @@ class App {
      * @return bool
      * @throws \LT\Exceptions\ConfigurationException
      */
-    public static function isLoggedUser() {
+    public static function isLoggedUser() { return true;
         $config = Config::getInstance();
         if($config->test) return true;
         $session = self::getSession();
@@ -264,6 +264,7 @@ class App {
 //            $locale = $_COOKIE['languageCode'];
 //        }
 //        return $locale;
+        return 'ru_RU';
     }
 
     /*************** COMMON DATA ***************/
@@ -278,11 +279,15 @@ class App {
 //        return array_search($name, $dictionaryKeys);
     }
 
-    public static function getOrderTypes() {
-        $app = self::getInstance();
-        /** @var \LT\DAO\Order $orderDao */
-        $orderDao = $app->container->get('LT\DAO\Order');
-        return $orderDao->getOrderTypes();
+    private static $locales = [
+        'index'                => 'Index',
+        'rating'               => 'Rating',
+        'task-list'            => 'Задания',
+        'my-tasks'             => 'Мои Задания',
+        'terms-and-conditions' => 'Правила',
+    ];
+    public static function t($key) {
+        return array_key_exists($key, self::$locales) ? self::$locales[$key] : $key;
     }
 
 }

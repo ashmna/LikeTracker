@@ -7,8 +7,7 @@ namespace {
     $menu = [];
     if(App::isLoggedUser()) {
         $menu = [
-            'index',
-            'rating',
+//            'index',
             'task-list',
             'my-tasks',
             'terms-and-conditions',
@@ -16,7 +15,6 @@ namespace {
     } else {
         $menu = [
             'index',
-            'rating',
             'terms-and-conditions',
         ];
     }
