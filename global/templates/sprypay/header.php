@@ -19,7 +19,7 @@ use LT\Helpers\App;
 	<?php } ?>
 	<title><?= Config::getInstance()->partnerName ?></title>
 </head>
-<body>
+<body ng-controller="rootController">
 
 <table style="height:100%;width:100%;">
 	<tbody>

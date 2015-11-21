@@ -13,12 +13,20 @@ app.service('userServices', ['serverConnector', function (serverConnector) {
         });
     };
 
-    this.logout = function (data) {
+    this.logout = function () {
         return serverConnector.send({
             method: 'GET',
             url   : url('logout')
         });
     };
+
+    this.getCurrentUserData = function () {
+        return serverConnector.send({
+            method: 'GET',
+            url   : url('get-user-data')
+        });
+    };
+
 
 }]);
 

@@ -22,8 +22,8 @@ $balance = isset($userData['balance']) ? $userData['balance'] : 0;
 
 <hr>
 
-<img src="/img/rating.png"> Рейтинг: <b id="rat"><?= $rating ?></b><br>
-<img src="/img/balls.png"> Баллов: <b id="bal"><?= $balance ?></b>
+<img src="/img/rating.png"> Рейтинг: <b id="rat" ng-bind="userData.rating"><?= $rating ?></b><br>
+<img src="/img/balls.png"> Баллов: <b id="bal" ng-bind="userData.balance"><?= $balance ?></b>
 
 <!--<a href="#">
 <img src="/img/plus.png"> <b>Купить баллы</b>
@@ -31,8 +31,8 @@ $balance = isset($userData['balance']) ? $userData['balance'] : 0;
 -->
 
 <hr>
-<a href="/page/task-list/">Заработать баллы</a>
-<a href="/page/my-tasks/">Потратить баллы</a>
+<a href="/page/my-tasks/">Заработать баллы</a>
+<a href="/page/task-list/">Потратить баллы</a>
 <!--
 <a href="">Перевод баллов</a>
 <a href="">Партнерская программа</a>

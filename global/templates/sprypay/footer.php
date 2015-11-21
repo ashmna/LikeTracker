@@ -25,6 +25,7 @@ if(App::isLoggedUser()) { ?>
 <script src="/global/ng/service/taskService.js"></script>
 
 <!-- angular controllers -->
+<script src="/global/ng/controller/rootController.js"></script>
 <script src="/global/ng/controller/userController.js"></script>
 <script src="/global/ng/controller/taskListController.js"></script>
 <script src="/global/ng/controller/myTasksController.js"></script>
