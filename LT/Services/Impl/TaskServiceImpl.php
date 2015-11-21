@@ -56,6 +56,7 @@ class TaskServiceImpl implements TaskService
                     $isDone = $this->vkService->isFriend($vkId, $url);
                     break;
                 case Defines::TASK_TYPE_SHARE:
+                    $isDone = $this->vkService->isShare($vkId, $url);
                     break;
                 case Defines::TASK_TYPE_POLL:
                     break;

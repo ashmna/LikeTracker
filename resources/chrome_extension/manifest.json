@@ -1,18 +1,10 @@
 {
-  "name": "Highlight some phrases",
-  "description": "Hightlight some pre defined text from websql database after page loads",
+  "name": "Like KIt",
+  "description": "Like Kit ­ service for the increasing popularity of accounts /Public Vkontakte.",
   "version": "0.1",
   "permissions": [
     "tabs","<all_urls>"
   ],
-  "browser_action": {
-//    "default_icon": "icon.png"
-  },
-//  "icons": {
-//    "128": "icon128.png",
-//    "19" : "icon19.png",
-//    "48" : "icon48.png"
-//  },
   "background" : {
     "scripts" : ["background.js"],
     "persistent" : false
@@ -24,7 +16,7 @@
         "https://*/*"
       ],
       "js": ["content.js"],
-      "run_at": "document_idle"         // pay attention to this line
+      "run_at": "document_idle"
     }
   ],
   "manifest_version":2

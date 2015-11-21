@@ -10,6 +10,7 @@ interface VkService
     function isLiked($vkId, $url);
     function isGroupMember($vkId, $url);
     function isFriend($vkId, $url);
+    function isShare($vkId, $url);
     function getUser($vkId);
     function isWatchVideo(Task $task, $watchDuration);
 }

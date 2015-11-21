@@ -3,6 +3,7 @@
 namespace LT\Services\Impl;
 
 
+use LT\Helpers\Utils;
 use LT\Models\Task;
 use LT\Services\VkService;
 
@@ -55,7 +56,7 @@ class VkServiceImpl implements VkService
         $result = false;
         //list($userId) = $this->parsUrl($url);
         $params = [
-            'user_id' => $userId,
+            'user_id' => $vkId,
         ];
         $response = $this->getMethodResult('friends.getLists', $params);
         if(!isset($response['error'])
@@ -65,10 +66,28 @@ class VkServiceImpl implements VkService
         }
         return $result;
     }
-    //Репосты
-    //wall.getReposts
-    //owner_id
-    //post_id
+
+    public function isShare($vkId, $url) {
+        $result = false;
+        preg_match("/([a-z]*)([-0-9]*)_(\w*)/", $url, $matches);
+        if(isset($matches)) {
+            list($url, $type, $ownerId, $itemId) = $matches;
+
+            $params = [
+                'owner_id' => $ownerId,
+                'post_id'  => $itemId,
+                'count'    => 1000,
+            ];
+            $response = $this->getMethodResult('wall.getReposts', $params);
+            if (!isset($response['error'])
+                && !empty($response['response'])
+                && !empty($response['response']['items'])
+            ) {
+                $result = in_array($vkId, Utils::arrayColumn($response['response']['items'], 'to_id'));
+            }
+        }
+        return $result;
+    }
 
     //polls.getVoters
 
