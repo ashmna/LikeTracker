@@ -31,8 +31,8 @@ $balance = isset($userData['balance']) ? $userData['balance'] : 0;
 -->
 
 <hr>
-<a href="/page/my-tasks/">Заработать баллы</a>
-<a href="/page/task-list/">Потратить баллы</a>
+<a href="/page/task-list/">Заработать баллы</a>
+<a href="/page/my-tasks/">Потратить баллы</a>
 <!--
 <a href="">Перевод баллов</a>
 <a href="">Партнерская программа</a>
