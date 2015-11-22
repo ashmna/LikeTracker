@@ -280,7 +280,7 @@ class App {
     }
 
     private static $locales = [
-        'index'                => 'Index',
+        'index'                => 'Главная',
         'rating'               => 'Rating',
         'task-list'            => 'Задания',
         'my-tasks'             => 'Мои Задания',

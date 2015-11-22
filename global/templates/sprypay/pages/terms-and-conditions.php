@@ -1,12 +1,14 @@
 <table style="height:100%;width:800px; border-collapse: collapse;">
     <tbody>
     <tr>
+        <?php if(\LT\Helpers\App::isLoggedUser()) { ?>
         <td valign="top" style="height:100%;width:25%;">
             <div class="left_block">
                 <?php include dirname(__DIR__).DIRECTORY_SEPARATOR.'block'.DIRECTORY_SEPARATOR.'left.php' ?>
             </div>
             <?php include dirname(__DIR__).DIRECTORY_SEPARATOR.'block'.DIRECTORY_SEPARATOR.'info.php' ?>
         </td>
+        <?php } ?>
         <td width="" valign="top" style="height:100%;width:75%;">
             <div class="right_block">
                 <div class="title"><font color="#333333">
