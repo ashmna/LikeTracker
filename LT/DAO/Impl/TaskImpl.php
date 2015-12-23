@@ -63,7 +63,9 @@ class TaskImpl implements \LT\DAO\Task {
 
     public function doTask($taskId) {
         $task = $this->getTaskById($taskId);
-        if(!isset($task)) return false;
+        if(!isset($task)) {
+            return false;
+        }
 
         $userTask = new UserTask();
         $userTask->setIsDone(true);

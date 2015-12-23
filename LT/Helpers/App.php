@@ -2,15 +2,9 @@
 
 namespace LT\Helpers;
 
-
-
-
 use A7\A7;
 use A7\ReflectionUtils;
 use LT\Exceptions\UndefinedMethodException;
-
-//use LT\Models\Affiliate;
-//use LT\Models\CronResult;
 
 class App {
     /** @var App */
@@ -51,15 +45,12 @@ class App {
     protected function init() {
         $config = Config::getInstance();
         if($config->useSession) {
-//            $secure = isset($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] == 'https';
-//            session_set_cookie_params(604800, '/', '.'.Config::getInstance()->partnerDomain, $secure);
             session_start();
         }
         set_error_handler(['LT\Helpers\App','errorHandler']);
         $this->container = new A7();
         $this->container->enablePostProcessor('DependencyInjection', $config->definition);
         $this->container->enablePostProcessor('Transaction', ['class' => '\LT\Helpers\DB']);
-//        $this->container->enablePostProcessor('Logger', ['path' => 'D:\affiliates.log']);
     }
 
     public static function getPartnerId() {
@@ -68,7 +59,7 @@ class App {
 
     public static function getUserId() {
         $id = 0;
-        $user = self::getSession()->user;
+        $user = static::getSession()->user;
         if(isset($user)) {
             $id = $user->getVkId();
         }
@@ -76,14 +67,14 @@ class App {
     }
 
     public function callFromRequest(array $arguments = []) {
-        $classData  = self::getClassNameAndMethodFromURI();
+        $classData  = static::getClassNameAndMethodFromURI();
         $className  = str_replace('-', '', $classData['className']);
         $methodName = str_replace('-', '', $classData['methodName']);
         if(empty($className)) {
-            throw new \Exception('empty class name');
+            throw new \UnexpectedValueException('empty class name');
         }
         if(empty($methodName)) {
-            throw new \Exception('empty method name');
+            throw new \UnexpectedValueException('empty method name');
         }
         $className = 'LT\Services\\'.ucfirst($className).'Service';
 
@@ -174,7 +165,7 @@ class App {
 
         $content = $errstr."\n file ".$errfile." line ".$errline;
 
-        if(in_array($errno, self::$phpWarning)) {
+        if(in_array($errno, static::$phpWarning)) {
             Notification::warning(1, $content, 'php_warning');
         } else {
             Notification::error(1, $content, 'php_error');
@@ -183,21 +174,21 @@ class App {
 
     public static function getCurrentPage() {
         $page = 'index';
-        if(isset(self::$page)) {
-            $page = self::$page;
+        if(isset(static::$page)) {
+            $page = static::$page;
         } elseif(isset($_GET['page'])) {
             $page = $_GET['page'];
         }
-        self::$page = $page;
+        static::$page = $page;
         return $page;
     }
 
     public static function setCurrentPage($page) {
-        self::$page = $page;
+        static::$page = $page;
     }
 
 //    public static function getCounterNextIndex($counterName) {
-//        $app = self::getInstance();
+//        $app = static::getInstance();
 //        /** @var \LT\DAO\Counter $counterDAO */
 //        $counterDAO = $app->container->get('LT\DAO\Counter');
 //        return $counterDAO->getNextIndex($counterName);
@@ -208,10 +199,10 @@ class App {
      * @return Session
      */
     public static function getSession() {
-        if(!isset(self::$session)) {
-            self::$session = new Session();
+        if(!isset(static::$session)) {
+            static::$session = new Session();
         }
-        return self::$session;
+        return static::$session;
     }
 
     /**
@@ -221,13 +212,13 @@ class App {
     public static function isLoggedUser() {
         $config = Config::getInstance();
         if($config->test) return true;
-        $session = self::getSession();
+        $session = static::getSession();
         return isset($session->isLogged) ? $session->isLogged : false;
     }
 
     public static function getUserRole() {
-//        if(self::isLoggedUser()) {
-//            $affiliate = self::getCurrentUser();
+//        if(static::isLoggedUser()) {
+//            $affiliate = static::getCurrentUser();
 //            if(isset($affiliate) && isset($affiliate->role)) {
 //                $role = $affiliate->role;
 //            }
@@ -236,7 +227,7 @@ class App {
         return Defines::ROLE_ADMIN;
     }
     public static function getUserData() {
-        $app = self::getInstance();
+        $app = static::getInstance();
         /** @var \LT\Services\UserService $userDAO */
         $userDAO = $app->container->get('LT\Services\UserService');
         return $userDAO->getUserData();
@@ -248,11 +239,11 @@ class App {
 
 
     public static function getLocale() {
-//        $session = self::getSession();
+//        $session = static::getSession();
 //        $config = Config::getInstance();
 //        $locale = $config->getCurrentLocale();
-//        if(self::isLoggedUser()) {
-//            $user = self::getCurrentUser();
+//        if(static::isLoggedUser()) {
+//            $user = static::getCurrentUser();
 //            if(!empty($user->locale)) {
 //                $locale = $user->locale;
 //            }
@@ -272,7 +263,7 @@ class App {
 
 
     public static function getDictionaryKeyIdByName($name) {
-//        $app = self::getInstance();
+//        $app = static::getInstance();
 //        /** @var \LT\DAO\Dictionary $commonFunctions */
 //        $commonFunctions = $app->container->get('LT\DAO\Dictionary');
 //        $dictionaryKeys = $commonFunctions->getDictionaryKeys();
@@ -287,7 +278,7 @@ class App {
         'terms-and-conditions' => 'Правила',
     ];
     public static function t($key) {
-        return array_key_exists($key, self::$locales) ? self::$locales[$key] : $key;
+        return array_key_exists($key, static::$locales) ? static::$locales[$key] : $key;
     }
 
 }
