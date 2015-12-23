@@ -60,7 +60,8 @@ class XML2Array {
 		}
         $array = [];
 		$array[$xml->documentElement->tagName] = self::convert($xml->documentElement);
-        self::$xml = null;    // clear the xml node in the class for 2nd time use.
+		// clear the xml node in the class for 2nd time use.
+        self::$xml = null;
         return $array;
     }
 

@@ -84,7 +84,7 @@ class Utils {
 
         $records = [];
         if($genRecords) {
-            $toDate = $toDate->add(new \DateInterval('PT1S')); //TODO: kara asenq aveli lav @lni bayc petq chi
+            $toDate = $toDate->add(new \DateInterval('PT1S'));
             $dateRange = new \DatePeriod($fromDate, new \DateInterval('P1D'), $toDate);
 
             foreach($dateRange as $cDate) {

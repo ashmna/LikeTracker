@@ -77,7 +77,8 @@ class Config {
         $globalConfig = [];
         self::$rootDir = dirname(dirname(__DIR__));
         $globalConfigPath = self::$rootDir.DIRECTORY_SEPARATOR.'config.php';
-        if($skinDir == 'test') { // only for test , delete on realise
+        // only for test , delete on realise
+        if($skinDir == 'test') {
             $globalConfigPath = self::$rootDir.DIRECTORY_SEPARATOR.'test_config.php';
         }
         if(file_exists($globalConfigPath)) {
@@ -96,10 +97,12 @@ class Config {
         }
 
         self::$skinRootDir = $skinDir;
-        if(empty(self::$skinRootDir)) { // for test
+        // for test
+        if(empty(self::$skinRootDir)) {
             self::$skinRootDir = __DIR__;
         }
-        if($skinDir == 'test') { // only for test , delete on realise
+        // only for test , delete on realise
+        if($skinDir == 'test') {
             self::$skinRootDir = self::$rootDir.'/skins/test';
         }
         $config = $globalConfig;
@@ -112,7 +115,6 @@ class Config {
         static::$instance = new static($config);
         App::getInstance();
         self::$instance->initLocale();
-//        self::$instance->initReferralId();
     }
 
     public function setUseSession($useSession) {

@@ -15,11 +15,12 @@ return [
     'email'              => [
         'smtp'    => [
             'host'     => '192.168.219.19',
-            'port'     => 25, // for GMail 465 or 587
+            // for GMail 465 or 587
+            'port'     => 25,
             'username' => '',
             'password' => '',
-            'auth'     => false, //Enable SMTP authentication
-            //'secure'   => 'ssl', //Set the encryption system to use - ssl (deprecated) or tls
+            //Enable SMTP authentication
+            'auth'     => false,
         ],
         'default' => [
             'email' => 'affiliates@vbet.com',
@@ -58,7 +59,8 @@ return [
     ],
 
     'colors' => [
-        'workingTimes' => '#a4db79' //        rgb(164, 219, 121)
+        // rgb(164, 219, 121)
+        'workingTimes' => '#a4db79'
     ],
 
     'environment' => 'development',

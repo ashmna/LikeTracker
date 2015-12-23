@@ -45,7 +45,8 @@ class FileUpload {
             if($setNotification) Notification::error(1, 'File already exists.');
             return false;
         }
-        if ($this->uploadedFile["size"] > $maxSize) { //5000000 = 5 MB
+        //5000000 = 5 MB
+        if ($this->uploadedFile["size"] > $maxSize) {
             if($setNotification) {
                 Notification::error(1, 'File is too large.');
             }
