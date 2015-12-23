@@ -7,6 +7,8 @@ namespace LT\Helpers;
 class Defines {
     const ROLE_ADMIN = 'Admin';
 
+    const SQL_DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+
     const STATUS_DISABLED  = 0;
     const STATUS_ENABLED   = 1;
 

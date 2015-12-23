@@ -5,6 +5,7 @@ namespace LT\Services\Impl;
 
 
 use LT\Helpers\App;
+use LT\Helpers\Defines;
 use LT\Models\User;
 use LT\Services\UserService;
 
@@ -31,7 +32,7 @@ class UserServiceImpl implements UserService {
     public function login($vkId) {
         $user = new User();
         $user->setVkId($vkId);
-        $user->setLastLoginDate(date('Y-m-d H:i:s'));
+        $user->setLastLoginDate(date(Defines::SQL_DATE_TIME_FORMAT));
         $this->userDao->createOrUpdate($user);
         $session = App::getSession();
         $session->isLogged = true;

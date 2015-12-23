@@ -7,6 +7,8 @@ namespace {
 
     use LT\Helpers\App;
     use LT\Helpers\Config;
+    use LT\Helpers\Defines;
+
 //die;
     require_once dirname(dirname(__DIR__)) .'/vendor/autoload.php';
 
@@ -76,7 +78,7 @@ namespace {
         $scopeTime = $scopeEnd - $scopeStart;
         $scopeTime = round($scopeTime, 2);
         echo $config->partnerId.'   ';
-        echo $date->format('Y-m-d H:i:s');
+        echo $date->format(Defines::SQL_DATE_TIME_FORMAT);
         echo " OK $scopeTime ms \n<br>";
     }
     $end = microtime(true);

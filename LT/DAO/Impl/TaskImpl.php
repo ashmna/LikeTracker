@@ -6,6 +6,7 @@ namespace LT\DAO\Impl;
 
 
 use LT\Helpers\App;
+use LT\Helpers\Defines;
 use LT\Models\Task;
 use LT\Models\UserTask;
 
@@ -19,7 +20,7 @@ class TaskImpl implements \LT\DAO\Task {
 
     public function createTask(Task $task) {
         $task->setOwnerId(App::getUserId());
-        $task->setCreateDate(date('Y-m-d H:i:s'));
+        $task->setCreateDate(date(Defines::SQL_DATE_TIME_FORMAT));
         $this->db->insert('tasks', $task->toArray());
         return $this->db->getLastInsertId();
     }
@@ -68,7 +69,7 @@ class TaskImpl implements \LT\DAO\Task {
         $userTask->setIsDone(true);
         $userTask->setTaskId($task->getTaskId());
         $userTask->setUserId(App::getUserId());
-        $userTask->setCreateDate(date('Y-m-d H:i:s'));
+        $userTask->setCreateDate(date(Defines::SQL_DATE_TIME_FORMAT));
 
         $this->db->insert('users_tasks', $userTask->toArray());
         $givenAmount = $task->getPrice();
@@ -107,7 +108,7 @@ class TaskImpl implements \LT\DAO\Task {
         $userTask->setIsDone(false);
         $userTask->setTaskId($taskId);
         $userTask->setUserId(App::getUserId());
-        $userTask->setCreateDate(date('Y-m-d H:i:s'));
+        $userTask->setCreateDate(date(Defines::SQL_DATE_TIME_FORMAT));
 
         return $this->db->insert('users_tasks', $userTask->toArray());
     }
