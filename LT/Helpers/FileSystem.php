@@ -9,17 +9,17 @@ class FileSystem {
     private static $fileSystemPart = 1000;
 
     public static function fileNameToPath($fileName) {
-        $folderName = 'documents';
         $key = substr($fileName, 0, 1);
         $extensionIndex = strpos('.', $fileName);
         $extension = substr('.', $fileName);
         $fileNumber = substr($fileName, $extensionIndex);
-        $part = self::$fileSystemPart;
+        $part = static::$fileSystemPart;
         switch($key) {
             case Defines::FILE_TYPE_DOCUMENT: $folderName = 'documents'; break;
             case Defines::FILE_TYPE_IMAGE:    $folderName = 'images'; break;
             case Defines::FILE_TYPE_VIDEO:    $folderName = 'videos'; break;
             case Defines::FILE_TYPE_MUSICS:   $folderName = 'musics'; break;
+            default: $folderName = 'documents'; break;
         }
         $number = floor($fileNumber/$part);
         $folderNumber = $part*($number + 1);
@@ -31,17 +31,18 @@ class FileSystem {
         $extension = explode('.', $originalFilename);
         $extension = $extension[count($extension)-1];
 
-        $part = self::$fileSystemPart;
+        $part = static::$fileSystemPart;
         $number = App::getCounterNextIndex('fileSystem');
         $folderNumber = floor($number/$part);
         $folderNumber = $part*($folderNumber + 1);
 
-        $folderName = 'documents';
         switch($fileType) {
             case Defines::FILE_TYPE_DOCUMENT: $folderName = 'documents'; break;
             case Defines::FILE_TYPE_IMAGE:    $folderName = 'images'; break;
             case Defines::FILE_TYPE_VIDEO:    $folderName = 'videos'; break;
-            case Defines::FILE_TYPE_MUSICS:   $folderName = 'musics'; break;        }
+            case Defines::FILE_TYPE_MUSICS:   $folderName = 'musics'; break;
+            default: $folderName = 'documents'; break;
+        }
 
         $path = Config::getSkinRootDir();
         $path .= "/data/$folderName/$folderNumber";
@@ -52,7 +53,7 @@ class FileSystem {
     }
 
     public static function crateFileFromBase64($string, $originalFilename, $fileType = Defines::FILE_TYPE_IMAGE) {
-        list($fileName, $path) = self::generateFileName($originalFilename, $fileType);
+        list($fileName, $path) = static::generateFileName($originalFilename, $fileType);
         list($type, $data) = explode(';', $string);
         list(, $data)      = explode(',', $data);
         $data = base64_decode($data);

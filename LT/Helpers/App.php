@@ -7,6 +7,7 @@ use A7\ReflectionUtils;
 use LT\Exceptions\UndefinedMethodException;
 
 class App {
+
     /** @var App */
     protected static $instance;
     protected static $phpWarning = [
@@ -19,15 +20,16 @@ class App {
     ];
     protected static $session;
     protected static $page;
-
+    protected static $locales;
 
     protected $builder;
+
     /**
      * @var \A7\A7
      */
     public $container;
 
-    protected function  __construct() {
+    private function  __construct() {
     }
 
     /**
@@ -64,6 +66,17 @@ class App {
             $id = $user->getVkId();
         }
         return $id;
+    }
+
+    private static function initLocales() {
+        if(!isset(static::$locales)) {
+            $path = Config::getGlobalDir()."/locale/".static::getInstance()->getLocale().".json";
+            if(file_exists($path)) {
+                static::$locales = json_decode(file_get_contents($path));
+            } else {
+                static::$locales = [];
+            }
+        }
     }
 
     public function callFromRequest(array $arguments = []) {
@@ -129,39 +142,22 @@ class App {
         return $this->container->call($class, $methodName, $arguments);
     }
 
-
-//    public function callCronFunction(CronResult $cronResult, $pusherName, $className = 'LT\Services\PusherService', array $arguments = [], $functionPrefix = 'push') {
-//        $config = Config::getInstance();
-//        if($config->checkCronName($pusherName)) {
-//            /** @var \LT\Helpers\DB $db */
-//            $db = $this->container->get('LT\Helpers\DB');
-//            $db->beginTransaction();
-//            $functionName = $functionPrefix.$pusherName;
-//            try {
-//                if($this->call($className, $functionName, $arguments)) {
-//                    $db->commit();
-//                    call_user_func([$cronResult, 'set'.$pusherName], CronResult::OK);
-//                } else {
-//                    $db->rollback();
-//                    call_user_func([$cronResult, 'set'.$pusherName], CronResult::NOK);
-//                }
-//            } catch(\Exception $e) {
-//                $db->rollback();
-//                call_user_func([$cronResult, 'set'.$pusherName], CronResult::NOK);
-//            }
-//        }
-//    }
-
     public static function exceptionHandler(\Exception $exception) {
-        if(Config::getInstance()->environment != 'development') return;
+        if (Config::getInstance()->environment != 'development') {
+            return;
+        }
         $content = $exception->getMessage()."\n file ".$exception->getFile()." line ".$exception->getLine();
         Notification::error(1, $content, 'php_exception');
     }
 
     public static function errorHandler($errno, $errstr, $errfile, $errline) {
-        if(Config::getInstance()->environment != 'development') return;
+        if(Config::getInstance()->environment != 'development') {
+            return;
+        }
 
-        if($errno == E_STRICT) return;
+        if($errno == E_STRICT) {
+            return;
+        }
 
         $content = $errstr."\n file ".$errfile." line ".$errline;
 
@@ -187,13 +183,6 @@ class App {
         static::$page = $page;
     }
 
-//    public static function getCounterNextIndex($counterName) {
-//        $app = static::getInstance();
-//        /** @var \LT\DAO\Counter $counterDAO */
-//        $counterDAO = $app->container->get('LT\DAO\Counter');
-//        return $counterDAO->getNextIndex($counterName);
-//    }
-
     /*************** USER ***************/
     /**
      * @return Session
@@ -211,19 +200,14 @@ class App {
      */
     public static function isLoggedUser() {
         $config = Config::getInstance();
-        if($config->test) return true;
+        if($config->test) {
+            return true;
+        }
         $session = static::getSession();
         return isset($session->isLogged) ? $session->isLogged : false;
     }
 
     public static function getUserRole() {
-//        if(static::isLoggedUser()) {
-//            $affiliate = static::getCurrentUser();
-//            if(isset($affiliate) && isset($affiliate->role)) {
-//                $role = $affiliate->role;
-//            }
-//        }
-//        return $role;
         return Defines::ROLE_ADMIN;
     }
     public static function getUserData() {
@@ -239,46 +223,24 @@ class App {
 
 
     public static function getLocale() {
-//        $session = static::getSession();
-//        $config = Config::getInstance();
-//        $locale = $config->getCurrentLocale();
-//        if(static::isLoggedUser()) {
-//            $user = static::getCurrentUser();
-//            if(!empty($user->locale)) {
-//                $locale = $user->locale;
-//            }
-//        }
-//        elseif(isset($session->language)) {
-//            $locale = $session->language;
-//        }
-//        elseif($config->useSession && isset($_COOKIE['languageCode'])) {
-//            $locale = $_COOKIE['languageCode'];
-//        }
-//        return $locale;
         return 'ru_RU';
     }
 
     /*************** COMMON DATA ***************/
 
-
-
-    public static function getDictionaryKeyIdByName($name) {
-//        $app = static::getInstance();
-//        /** @var \LT\DAO\Dictionary $commonFunctions */
-//        $commonFunctions = $app->container->get('LT\DAO\Dictionary');
-//        $dictionaryKeys = $commonFunctions->getDictionaryKeys();
-//        return array_search($name, $dictionaryKeys);
-    }
-
-    private static $locales = [
-        'index'                => 'Главная',
-        'rating'               => 'Rating',
-        'task-list'            => 'Задания',
-        'my-tasks'             => 'Мои Задания',
-        'terms-and-conditions' => 'Правила',
-    ];
+    /**
+     * Translate the word
+     *
+     * @param String $key Word
+     * @return String Translated word
+     */
     public static function t($key) {
-        return array_key_exists($key, static::$locales) ? static::$locales[$key] : $key;
+        static::initLocales();
+        if (array_key_exists($key, static::$locales)) {
+            return static::$locales[$key];
+        } else {
+            return $key;
+        }
     }
 
 }

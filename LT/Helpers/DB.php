@@ -331,23 +331,29 @@ class DB {
         if(is_array($fields)) {
             $fields = implode(', ', $fields);
         }
+
         $sql = "SELECT ";
-        if ($calcFoundRows)
+        if ($calcFoundRows) {
             $sql .= " SQL_CALC_FOUND_ROWS ";
+        }
 
         $sql .= $fields." FROM ".$table;
 
-        if (!empty($where))
+        if (!empty($where)) {
             $sql .= " WHERE ".$where;
+        }
 
-        if (!empty($groupBy))
+        if (!empty($groupBy)) {
             $sql .= " GROUP BY ".$groupBy;
+        }
 
-        if (!empty($orderBy))
+        if (!empty($orderBy)) {
             $sql .= " ORDER BY ".$orderBy;
+        }
 
-        if (!empty($limit))
+        if (!empty($limit)) {
             $sql .= " LIMIT ".$limit;
+        }
 
         $sql .= ";";
         return $this->run($sql, $bind, ['fetch' => true]);
@@ -362,11 +368,6 @@ class DB {
         }
         return $count;
     }
-
-
-
-
-
     /**
      * @param string $table
      * @param array $info
@@ -403,32 +404,26 @@ class DB {
     }
 
     public function beginTransaction() {
-        if($this->transactionNestingLevel == 0) {
-            if(!$this->db->inTransaction()) {
-                if($this->stmt) {
-                    $this->stmt->closeCursor();
-                }
-                $this->db->beginTransaction();
+        if($this->transactionNestingLevel == 0 && !$this->db->inTransaction()) {
+            if($this->stmt) {
+                $this->stmt->closeCursor();
             }
+            $this->db->beginTransaction();
         }
         $this->transactionNestingLevel++;
     }
 
     public function commit() {
         $this->transactionNestingLevel--;
-        if ($this->transactionNestingLevel == 0) {
-            if($this->db->inTransaction()) {
-                $this->db->commit();
-            }
+        if ($this->transactionNestingLevel == 0 && $this->db->inTransaction()) {
+            $this->db->commit();
         }
     }
 
     public function rollback() {
         $this->transactionNestingLevel--;
-        if ($this->transactionNestingLevel == 0) {
-            if($this->db->inTransaction()) {
-                $this->db->rollBack();
-            }
+        if ($this->transactionNestingLevel == 0 && $this->db->inTransaction()) {
+            $this->db->rollBack();
         }
     }
 

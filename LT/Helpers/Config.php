@@ -75,11 +75,11 @@ class Config {
             $skinDir = $_SERVER['DOCUMENT_ROOT'];
         }
         $globalConfig = [];
-        self::$rootDir = dirname(dirname(__DIR__));
-        $globalConfigPath = self::$rootDir.DIRECTORY_SEPARATOR.'config.php';
+        static::$rootDir = dirname(dirname(__DIR__));
+        $globalConfigPath = static::$rootDir.DIRECTORY_SEPARATOR.'config.php';
         // only for test , delete on realise
         if($skinDir == 'test') {
-            $globalConfigPath = self::$rootDir.DIRECTORY_SEPARATOR.'test_config.php';
+            $globalConfigPath = static::$rootDir.DIRECTORY_SEPARATOR.'test_config.php';
         }
         if(file_exists($globalConfigPath)) {
             $globalConfig = require $globalConfigPath;
@@ -96,14 +96,14 @@ class Config {
             }
         }
 
-        self::$skinRootDir = $skinDir;
+        static::$skinRootDir = $skinDir;
         // for test
-        if(empty(self::$skinRootDir)) {
-            self::$skinRootDir = __DIR__;
+        if(empty(static::$skinRootDir)) {
+            static::$skinRootDir = __DIR__;
         }
         // only for test , delete on realise
         if($skinDir == 'test') {
-            self::$skinRootDir = self::$rootDir.'/skins/test';
+            static::$skinRootDir = static::$rootDir.'/skins/test';
         }
         $config = $globalConfig;
         if(!empty($params)) {
@@ -112,9 +112,8 @@ class Config {
         if(!empty($skinConfig)) {
             $config = array_replace_recursive($globalConfig, $skinConfig);
         }
-        static::$instance = new static($config);
+        static::$instance = new self($config);
         App::getInstance();
-        self::$instance->initLocale();
     }
 
     public function setUseSession($useSession) {
@@ -155,19 +154,16 @@ class Config {
         }
     }
 
-
     public function getTimezone() {
         return $this->timezone;
     }
 
-
-
     public static function getGlobalDir() {
-        return self::$rootDir.'/global';
+        return static::$rootDir.'/global';
     }
 
     public static function getSkinRootDir() {
-        return self::$skinRootDir;
+        return static::$skinRootDir;
     }
 
     private function initDefaultTimezone() {
@@ -176,46 +172,16 @@ class Config {
         }
     }
 
-    public function initLocale() {
-        $directory = self::getGlobalDir().'/locale';
-        $domain = 'main';
-
-        $localeCode = App::getLocale();
-
-        $locale = $this->languagesCode[$localeCode];
-
-        if($this->useSession) {
-            setcookie("languageCode", $localeCode, 0, '/');
-            setcookie("language", $locale, 0, '/');
-        }
-
-        putenv("LANG=".$localeCode);
-        setlocale(LC_ALL, $localeCode);
-
-        bindtextdomain($domain, $directory);
-        textdomain($domain);
-        bind_textdomain_codeset($domain, 'UTF-8');
-    }
-
-    public function initReferralId() {
-//        if($this->useSession) {
-//            if(isset($_GET['referralId'])) {
-//                $parentAffiliateId = abs(intval($_GET['referralId']));
-//                if(isset($this->definition['referralIdLifeTime'])) {
-//                    $referralIdLifeTime = $this->definition['referralIdLifeTime'];
-//                    setcookie("parentAffiliateId", $parentAffiliateId, time() + $referralIdLifeTime, '/');
-//                }
-//            }
-//        }
-    }
-
     public function getTest() {
         return !empty($this->test);
     }
 
-
     public function getUseSession() {
-        return $this->test ? false : $this->useSession;
+        if ($this->test) {
+            return false;
+        } else {
+            return $this->useSession;
+        }
     }
 
     public function getCurrentLocale() {
@@ -248,7 +214,9 @@ class Config {
 
     public function email($configName = '') {
         $path = explode('.', $configName);
-        if(!is_array($path)) $path = [$configName];
+        if(!is_array($path)) {
+            $path = [$configName];
+        }
         $res = $this->email;
         foreach($path as $key) {
             if(isset($res[$key])) {

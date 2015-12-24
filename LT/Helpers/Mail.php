@@ -21,10 +21,6 @@ class Mail {
         $mail->SMTPAuth   = $config->email('smtp.auth');
         $mail->Host       = $config->email('smtp.host');
         $mail->Port       = $config->email('smtp.port');
-        //$mail->SMTPSecure = $config->email('smtp.secure');
-
-        //$mail->Username = $config->email('smtp.username');
-        //$mail->Password = $config->email('smtp.password');
 
         $fromEmail = $config->email($mailSenderInfo.'.email');
         $mail->From = empty($fromEmail) ? $config->getInstance()->getPartnerEmail() : $fromEmail;

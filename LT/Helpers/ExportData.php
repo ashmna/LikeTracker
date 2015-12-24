@@ -43,38 +43,35 @@ class ExportData {
                 $phpExcelSheet->setCellValueByColumnAndRow($i, 1, $keys[$i]);
                 $phpExcelSheet->getColumnDimension(chr(65 + $i))->setAutoSize(true);
             }
-            // [merging], develop later
-            // $phpExcelSheet->mergeCells('A1:A2');
-            // $phpExcelSheet->getStyle('A1:A2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::VERTICAL_JUSTIFY);
             $phpExcelSheet->fromArray($data, ' ', 'A3');
             for ($i = 0; $i < $rowLength; ++$i) {
                 $rowIndex = $i + 1;
                 if ($rowIndex % 3 == 0) {
                     if ($rowIndex / 3 % 2) {
-                        self::colorRow($phpExcelSheet, $fromCode, $toCode, $i + 3, 'F9F9F9');
+                        static::colorRow($phpExcelSheet, $fromCode, $toCode, $i + 3, 'F9F9F9');
                     } else {
-                        self::colorRow($phpExcelSheet, $fromCode, $toCode, $i + 3, 'F5FLT');
+                        static::colorRow($phpExcelSheet, $fromCode, $toCode, $i + 3, 'F5FLT');
                     }
                 } else {
-                    self::colorRow($phpExcelSheet, $fromCode, $toCode, $i + 3, 'FFFFFF');
+                    static::colorRow($phpExcelSheet, $fromCode, $toCode, $i + 3, 'FFFFFF');
                 }
             }
 
-            self::colorRow($phpExcelSheet, $fromCode, $toCode, 1, $headerRGBColor);
+            static::colorRow($phpExcelSheet, $fromCode, $toCode, 1, $headerRGBColor);
             $headerStyle = [
                 'font'      => ['bold' => true,],
                 'alignment' => ['horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,]
             ];
             $phpExcelSheet->getStyle($fromCode . '1:' . $toCode . '1')->applyFromArray($headerStyle);
 
-            self::setBorderStyle($phpExcelSheet, $fromCode, $toCode, $rowLength+2, $borderColor);
+            static::setBorderStyle($phpExcelSheet, $fromCode, $toCode, $rowLength+2, $borderColor);
         }
 
         return $phpExcel;
     }
 
     public static function excelExport($data, $headerTitle = [], $headerRGBColor = 'FCFCFC') {
-        $phpExcel = self::init($data, $headerTitle, $headerRGBColor);
+        $phpExcel = static::init($data, $headerTitle, $headerRGBColor);
         $objWriter = new \PHPExcel_Writer_Excel5($phpExcel);
         $objWriter->save('php://output');
     }
@@ -87,7 +84,7 @@ class ExportData {
             return false;
         }
 
-        $phpExcel = self::init($data, $headerTitle, $headerRGBColor);
+        $phpExcel = static::init($data, $headerTitle, $headerRGBColor);
 
         $objWriter = \PHPExcel_IOFactory::createWriter($phpExcel, 'PDF');
         $objWriter->save('php://output');
