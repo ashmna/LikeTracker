@@ -45,7 +45,7 @@ class DB {
             \PDO::ATTR_DRIVER_NAME        => "mysql",
             \PDO::ATTR_EMULATE_PREPARES   => true,
 
-            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"
+          //  \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8"
         ];
         try {
             $this->db = new \PDO($conStr, $this->dbuser, $this->dbpass, $options);

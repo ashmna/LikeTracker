@@ -133,7 +133,7 @@ function ($scope, $location, taskService) {
             $scope.tab = 'all';
         }
         if(['like','group','friend','share','poll','comment','video'].indexOf($scope.type) == -1) {
-            $scope.type = '';
+            $scope.type = 'all';
         }
         if(typeToTitle[$scope.type]) {
             $scope.typeTitle = typeToTitle[$scope.type];

@@ -72,7 +72,7 @@ class App {
         if(!isset(static::$locales)) {
             $path = Config::getGlobalDir()."/locale/".static::getInstance()->getLocale().".json";
             if(file_exists($path)) {
-                static::$locales = json_decode(file_get_contents($path));
+                static::$locales = json_decode(file_get_contents($path), true);
             } else {
                 static::$locales = [];
             }
@@ -212,9 +212,9 @@ class App {
     }
     public static function getUserData() {
         $app = static::getInstance();
-        /** @var \LT\Services\UserService $userDAO */
-        $userDAO = $app->container->get('LT\Services\UserService');
-        return $userDAO->getUserData();
+        /** @var \LT\Services\UserService $userService */
+        $userService = $app->container->get('LT\Services\UserService');
+        return $userService->getUserData();
     }
 
     public static function redirectHandler() {

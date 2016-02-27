@@ -35,6 +35,7 @@ class Config {
     protected $useSession = true;
 
     protected $email;
+    protected $appId;
     protected $db = [];
     protected $definition = [];
     protected $partnerId;
@@ -118,6 +119,9 @@ class Config {
 
     public function setUseSession($useSession) {
         $this->useSession = $useSession;
+    }
+    public function getAppId() {
+        return $this->appId;
     }
     public function getDb() {
         return $this->db;

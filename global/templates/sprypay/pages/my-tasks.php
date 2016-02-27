@@ -37,7 +37,7 @@
                     <tr>
                     <tr ng-repeat="task in currentTaskList">
                         <td>
-                            <img src="img/likes.png">
+                            <img src="/img/likes.png">
                             <a href="http://vk.com/{{task.url}}" target="_blank">{{task.url}}</a>
                         </td>
                         <td ng-bind="task.doneCount"></td>

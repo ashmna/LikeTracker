@@ -1,6 +1,6 @@
 <table style="height:100%;width:800px; border-collapse: collapse;"
 	ng-controller="userController"
-	ng-init="init(5103114)">
+	ng-init="init(<?= \LT\Helpers\Config::getInstance()->getAppId() ?>)">
 	<tbody>
 	<tr>
 		<td valign="top" style="height:100%;width:0%;"></td>

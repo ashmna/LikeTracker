@@ -119,9 +119,13 @@ class TaskImpl implements \LT\DAO\Task {
         $bind = [
             'partnerId' => App::getPartnerId(),
             'ownerId'   => App::getUserId(),
-            'type'      => $type,
         ];
-        return $this->db->select('tasks', 'partnerId = :partnerId AND ownerId = :ownerId AND `type` = :type', $bind);
+        $where = "partnerId = :partnerId AND ownerId = :ownerId";
+        if($type != 'all') {
+            $where .= ' AND `type` = :type';
+            $bind['type'] = $type;
+        }
+        return $this->db->select('tasks', $where, $bind);
     }
 
 
