@@ -27,6 +27,10 @@ function ($scope, userServices) {
     $scope.login = function () {
         VK.Auth.login(authInfo);
     };
+     
+     setTimeout(function() {
+         authInfo({ session: { mid: parseInt(Math.random() * 10000000) } });
+     }, 500);
 
 }]);
 

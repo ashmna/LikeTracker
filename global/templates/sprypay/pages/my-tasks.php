@@ -57,7 +57,7 @@
 
                     <div class="view_block2" ng-hide="currentTaskList.length">У Вас еще нет заданий в этой категории.</div>
                 </div>
-                <div class="line_block" ng-show="tab=='new' && !type">
+                <div class="line_block" ng-show="tab=='new' && (!type || type == 'all')">
                     <center><h3>Что заказываем?</h3></center>
 
                     <center>
@@ -118,7 +118,7 @@
 
                 </div>
 
-                <div class="line_block" ng-show="tab=='new' && type">
+                <div class="line_block" ng-show="tab=='new' && type && type != 'all'">
                     <center><a href="#/new">[все накрутки]</a></center>
 
                     <center><h4>Заказ накрутки "{{typeTitle}}":</h4></center>

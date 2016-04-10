@@ -51,6 +51,7 @@ class App {
         }
         set_error_handler(['LT\Helpers\App','errorHandler']);
         $this->container = new A7();
+        $this->container->enablePostProcessor('AutoTest', ['recordFile' => dirname(dirname(__DIR__)).'/Tests/a7-tests-records']);
         $this->container->enablePostProcessor('DependencyInjection', $config->definition);
         $this->container->enablePostProcessor('Transaction', ['class' => '\LT\Helpers\DB']);
     }

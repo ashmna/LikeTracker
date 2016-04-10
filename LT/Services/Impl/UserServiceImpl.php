@@ -34,7 +34,7 @@ class UserServiceImpl implements UserService {
         $user = new User();
         $user->setVkId($vkId);
         $user->setLastLoginDate(date(Defines::SQL_DATE_TIME_FORMAT));
-        //$this->userDao->createOrUpdate($user);
+        $this->userDao->createOrUpdate($user);
         $session = App::getSession();
         $session->isLogged = true;
         $session->user = $user;
