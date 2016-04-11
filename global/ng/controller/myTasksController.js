@@ -67,11 +67,17 @@ function ($scope, $location, taskService) {
         var res = true;
         var price = Math.abs(parseInt($scope.currentTask.price));
         var count = Math.abs(parseInt($scope.currentTask.count));
+        if(isNaN(price)) price = 0;
+        if(isNaN(count)) count = 0;
+        $scope.currentTask.type = $scope.type;
+        $scope.currentTask.url = convertUrl($scope.currentTask.originalUrl);
 
-        $scope.currentTask.commission = '...';
-        $scope.currentTask.balanse  = '';
-
-        if(!$scope.currentTask.price || !$scope.currentTask.count || !$scope.currentTask.originalUrl) {
+        var t = false, t1 = false;
+        if(callBake) {
+            t = !$scope.currentTask.originalUrl;
+            t1 = !$scope.currentTask.url
+        }
+        if(!$scope.currentTask.price || !$scope.currentTask.count || t ) {
             $scope.currentTask.info = 'Пожалуйста, заполните все поля.';
             res = false;
         }
@@ -83,21 +89,25 @@ function ($scope, $location, taskService) {
             $scope.currentTask.info = 'Заказ должен быть хотя бы на 10 лайков, как минимум.';
             res = false;
         }
-        else if(!$scope.currentTask.url) {
+        else if(t1) {
             $scope.currentTask.info = 'Вы ввели ссылку не правильно. Ссылка должна иметь такой вид, как на следующих примерах:<br>https://vk.com/wall345678_12345<br>https://vk.com/photo345678_12345<br>https://vk.com/video345678_12345';
             res = false;
         }
         if(!res) {
             $scope.currentTask.infoClass = 'info2';
         } else {
-            $scope.currentTask.commission = Math.ceil($scope.currentTask.price*commissionPercent/100);
-            $scope.currentTask.balanse = currentTask.count * (currentTask.price + currentTask.commission);
 
-            $scope.currentTask.infoClass = 'info';
-            $scope.currentTask.info = 'Прежде чем вводить ссылку, проверьте, не защищена ли она настройками приватности.';
+            if(callBake) {
+                $scope.currentTask.infoClass = 'info';
+                $scope.currentTask.info = 'Прежде чем вводить ссылку, проверьте, не защищена ли она настройками приватности.';
+            }
         }
+
         if(callBake) {
             callBake(res);
+        } else {
+            $scope.currentTask.commission = Math.ceil($scope.currentTask.price*commissionPercent/100);
+            $scope.currentTask.balanse = count * (price + $scope.currentTask.commission);
         }
         //
         //'Запись не найдена или защищена настройками приватности. Проверьте существует ли запись или откройте к ней доступ для всех пользователей.'
@@ -149,8 +159,6 @@ function ($scope, $location, taskService) {
     });
 
     $scope.saveCurrentTask = function() {
-        $scope.currentTask.type = $scope.type;
-        $scope.currentTask.url = convertUrl($scope.currentTask.originalUrl);
         checkTask(function(res){
             if(res) {
                 $scope.currentTask.info = 'Пожалуйста, ждите...';

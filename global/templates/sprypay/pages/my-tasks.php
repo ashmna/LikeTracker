@@ -152,7 +152,7 @@
                                     <td valign="top">
                                         <input id="pri" class="form_text" type="text" name="price"
                                                maxlength="7" style="width: 85px" ng-model="currentTask.price"><br>
-                                        <small>С комиссией: <b id="pri_kom">{{currentTask.price + currentTask.commission}}</small>
+                                        <small>С комиссией: <b id="pri_kom">{{-(-currentTask.price + -currentTask.commission)}}</small>
                                     </td>
                                 </tr>
                                 <tr>
