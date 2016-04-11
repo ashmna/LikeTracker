@@ -22,6 +22,7 @@ function ($scope, $location, taskService) {
     };
     var newTask = function() {
         $scope.currentTask = {
+            originalUrl: '',
             price: 13,
             count: 10,
             info : "Прежде чем вводить ссылку, проверьте, не защищена ли она настройками приватности.",
@@ -64,15 +65,21 @@ function ($scope, $location, taskService) {
     };
     var checkTask = function(callBake) {
         var res = true;
+        var price = Math.abs(parseInt($scope.currentTask.price));
+        var count = Math.abs(parseInt($scope.currentTask.count));
+
+        $scope.currentTask.commission = '...';
+        $scope.currentTask.balanse  = '';
+
         if(!$scope.currentTask.price || !$scope.currentTask.count || !$scope.currentTask.originalUrl) {
             $scope.currentTask.info = 'Пожалуйста, заполните все поля.';
             res = false;
         }
-        else if($scope.currentTask.price < 2) {
+        else if(price < 2) {
             $scope.currentTask.info = 'Минимальная цена задания - 2 балла.';
             res = false;
         }
-        else if($scope.currentTask.count < 10) {
+        else if(count < 10) {
             $scope.currentTask.info = 'Заказ должен быть хотя бы на 10 лайков, как минимум.';
             res = false;
         }
@@ -83,8 +90,11 @@ function ($scope, $location, taskService) {
         if(!res) {
             $scope.currentTask.infoClass = 'info2';
         } else {
+            $scope.currentTask.commission = Math.ceil($scope.currentTask.price*commissionPercent/100);
+            $scope.currentTask.balanse = currentTask.count * (currentTask.price + currentTask.commission);
+
             $scope.currentTask.infoClass = 'info';
-            $scope.currentTask.info = 'Пожалуйста, ждите...';
+            $scope.currentTask.info = 'Прежде чем вводить ссылку, проверьте, не защищена ли она настройками приватности.';
         }
         if(callBake) {
             callBake(res);
@@ -101,20 +111,13 @@ function ($scope, $location, taskService) {
 
 
     $scope.$watch('currentTask.price', function(newValue, oldValue) {
-        $scope.currentTask.price = Math.abs(parseInt(newValue));
-        if(isNaN($scope.currentTask.price)) $scope.currentTask.price = 0;
-        if($scope.currentTask.price < 2) {
-            $scope.currentTask.price = 2;
-        }
-        $scope.currentTask.commission = Math.ceil($scope.currentTask.price*commissionPercent/100);
+        checkTask();
     });
+
     $scope.$watch('currentTask.count', function(newValue, oldValue) {
-        $scope.currentTask.count = Math.abs(parseInt(newValue));
-        if(isNaN($scope.currentTask.count)) $scope.currentTask.count = 0;
-        if($scope.currentTask.count < 10) {
-            $scope.currentTask.count = 10;
-        }
+        checkTask();
     });
+
     $scope.$watch('$location.$$path', function() {
         var arr = $location.$$path.split('/'), i = 0, tabFonded = false;
         $scope.type = '';
@@ -150,12 +153,13 @@ function ($scope, $location, taskService) {
         $scope.currentTask.url = convertUrl($scope.currentTask.originalUrl);
         checkTask(function(res){
             if(res) {
+                $scope.currentTask.info = 'Пожалуйста, ждите...';
                 taskService.createTask($scope.currentTask)
                     .success(function (data) {
                         if (data.status && data.result) {
                             newTask();
                             $scope.currentTask.infoClass = 'okey';
-                            $scope.currentTask.info = '<font color = "green"><b>Заказ успешно добавлен в <a href="#' + $scope.type + '">список Ваших заданий</a>!</b></font>';
+                            $scope.currentTask.info = '<font color="green"><b>Заказ успешно добавлен в <a href="#' + $scope.type + '">список Ваших заданий</a>!</b></font>';
                         }
                     });
             }

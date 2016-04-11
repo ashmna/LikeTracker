@@ -175,7 +175,7 @@
                                         <input type="hidden" id="balls" name="balls" maxlength="7"
                                                style="width: 85px" value="195">
                                         <input class="form_text" type="text" id="balanse" name="balanse"
-                                               maxlength="7" style="width: 85px" value="{{currentTask.count * (currentTask.price + currentTask.commission)}}"
+                                               maxlength="7" style="width: 85px" value="{{currentTask.balanse}}"
                                                disabled="disabled">
                                         <br>
                                     </td>

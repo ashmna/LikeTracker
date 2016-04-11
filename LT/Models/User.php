@@ -12,7 +12,7 @@ class User extends Model {
     protected $partnerId;
     protected $vkId;
     protected $lastLoginDate;
-    protected $balance = 0;
+    protected $balance = 300;
     protected $rating  = 0;
     protected $status  = Defines::STATUS_ENABLED;
 
