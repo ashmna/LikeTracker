@@ -74,8 +74,12 @@ function ($scope, $location, taskService) {
             });
     };
     $scope.doTask = function(task) {
-        var open = function(callBack){
-            task.win = window.open('http://vk.com/' + task.url, '', 'width=900, height=600, top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 900) / 2) + ', resizable=yes, scrollbars=yes, status=yes');
+        var open = function(callBack) {
+            if (!window.logging) {
+                window.logging = window.location.search.indexOf("logging=true") != -1;
+            }
+            var taskUrl = window.logging ? task.url+'?logging=true' : task.url;
+            task.win = window.open('http://vk.com/' + taskUrl, '', 'width=900, height=600, top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 900) / 2) + ', resizable=yes, scrollbars=yes, status=yes');
             task.timer = setInterval(function () {
                 if (task.win.closed) {
                     clearInterval(task.timer);

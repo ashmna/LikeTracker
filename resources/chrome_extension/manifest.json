@@ -2,6 +2,11 @@
   "name": "Like Kit",
   "description": "Like Kit ­ service for the increasing popularity of accounts /Public Vkontakte.",
   "version": "0.1",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "permissions": [
     "tabs","<all_urls>"
   ],

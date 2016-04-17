@@ -1,14 +1,16 @@
-(function(){
+(function() {
     //console.log('background.js');
 
     var taskList = {};
 
     function addTask(task) {
-        if(task) {
-            if(task.hasOwnProperty('$$hashKey')) {
+        log('background - addTask - task', task);
+        if (task) {
+            if (task.hasOwnProperty('$$hashKey')) {
                 delete task['$$hashKey'];
             }
             taskList[task.url] = task;
+            log('background - addTask - taskList', taskList);
             return true;
         } else {
             return false;
@@ -16,56 +18,72 @@
     }
 
     function removeTask(task) {
-        console.log('task',task);
-        console.log('taskList',taskList);
-        if(task && taskList[task.url]) {
+        log('background - removeTask - task , taskList', task, taskList);
+        if (task && taskList[task.url]) {
             var resTask = taskList[task.url];
-            console.log('resTask',resTask);
             delete taskList[task.url];
+            log('background - removeTask - found in list', resTask);
             return resTask;
         } else {
+            log('background - removeTask - task not found');
             return null;
         }
     }
 
     function getTask(url) {
-        if(taskList[url])
+        log('background - getTask - url', url);
+        if (taskList[url]) {
+            log('background - getTask - task found', taskList[url]);
             return taskList[url];
-        else
+        } else {
+            log('background - getTask - task not found - taskList', taskList);
             return null;
+        }
     }
 
 
 
-    chrome.extension.onMessage.addListener(function(request, sender, callback){
+    chrome.extension.onMessage.addListener(function(request, sender, callback) {
         if (!request) return;
         if (!request.cmd) return;
 
         var task = null;
-        if(request.task)
+        if (request.task)
             task = request.task;
+
+        log('background - extension.onMessage - request', request.cmd, request);
 
         switch (request.cmd) {
             case "lt.task.add":
                 callback(addTask(task));
-                //console.log('lt.task.add');
                 break;
             case "lt.task.remove":
                 callback(removeTask(task));
-                //console.log('lt.task.remove');
                 break;
             case "lt.task.get":
                 callback(getTask(request.url));
-                //console.log('lt.task.get');
                 break;
             case "lt.task.startWatch":
                 var t = getTask(task.url);
                 t.watchStart = (new Date()).getTime();
                 callback(t);
+                log('background - lt.task.startWatch - task', t);
                 break;
+            default:
+                log('background - extension.onMessage - command not found', request.cmd);
         }
 
     });
 
 
 })();
+
+
+function log() {
+    if (!window.logging) {
+        window.logging = window.location.search.indexOf("logging=true") != -1;
+    }
+    if (window.logging) {
+        console.log.apply(console, arguments);
+    }
+}
