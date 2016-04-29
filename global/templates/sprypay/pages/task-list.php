@@ -12,13 +12,9 @@
                 <div class="title">
                     <a href="#all"     ng-class="tab=='all'     ? 'title_select' : ''">Все</a>
                     <a href="#like"    ng-class="tab=='like'    ? 'title_select' : ''">Лайки</a>
-                    <a href="#group"   ng-class="tab=='group'   ? 'title_select' : ''">Сообщества</a>
-                    <a href="#friend"  ng-class="tab=='friend'  ? 'title_select' : ''">Друзья</a>
                     <a href="#share"   ng-class="tab=='share'   ? 'title_select' : ''">Репосты</a>
-                    <!--<a href="#poll"    ng-class="tab=='poll'    ? 'title_select' : ''">Опросы</a>
-                    <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>-->
                     <a href="#video"   ng-class="tab=='video'   ? 'title_select' : ''">Видео</a>
-                    <!--<a href="#my_tasks">Мои задания</a>-->
+                    <a href="#comment" ng-class="tab=='comment' ? 'title_select' : ''">Комменты</a>
                 </div>
                 <div class="line_block">
                     <div class="info2">
@@ -48,17 +44,13 @@
                                 <div class="b1">
                                     <div ng-click="doTask(task)" style="cursor:pointer">
                                         <img ng-show="task.type == 'like'"    src="/img/likes.png">
-                                        <img ng-show="task.type == 'group'"   src="/img/groups.png">
-                                        <img ng-show="task.type == 'friend'"  src="/img/friends.png">
                                         <img ng-show="task.type == 'share'"   src="/img/copies.png">
-                                        <img ng-show="task.type == 'poll'"    src="/img/poll.png">
+                                        <img ng-show="task.type == 'video'"   src="/img/video.png">
                                         <img ng-show="task.type == 'comment'" src="/img/comm.png">
 
                                         <b ng-show="task.type == 'like'"   >Лайкни</b>
-                                        <b ng-show="task.type == 'group'"  >Вступи</b>
-                                        <b ng-show="task.type == 'friend'" >Добавь</b>
                                         <b ng-show="task.type == 'share'"  >Расскажи</b>
-                                        <b ng-show="task.type == 'poll'"   >Голосуй</b>
+                                        <b ng-show="task.type == 'video'"  >Посмотри</b>
                                         <b ng-show="task.type == 'comment'">Коммент</b>
                                         {{task.url}}
                                     </div>

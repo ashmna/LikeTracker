@@ -56,15 +56,8 @@
 										</tr>
 										<tr>
 											<td bgcolor="" width="100%">
-												<img src="/img/friends.png">
-												&nbsp; Увеличить аудиторию Вашей страниц - получить
-												подписчиков, <b>друзей</b>
-											</td>
-										</tr>
-										<tr>
-											<td bgcolor="" width="100%">
-												<img src="/img/groups.png">
-												&nbsp; Увеличить аудиторию Вашего сообщества - получить <b>участников</b>
+												<img src="/img/video.png">
+												&nbsp; Увеличить количество <b>Video</b>
 											</td>
 										</tr>
 										<tr>
